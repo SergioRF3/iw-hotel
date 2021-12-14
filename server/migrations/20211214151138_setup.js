@@ -9,6 +9,7 @@ exports.up = function(knex) {
     table.string('dni', 255).notNullable()
     table.string('phone', 255).notNullable()
     table.integer('type').notNullable()
+    table.boolean('state').notNullable()
   })
   .createTable('hall', function(table) {
     table.increments().primary()
@@ -18,13 +19,15 @@ exports.up = function(knex) {
     table.string('description', 255).notNullable()
     table.string('image', 255).notNullable()
     table.double('price').notNullable()
+    table.boolean('state').notNullable()
   })
-  .createTable('services', function(table){
+  .createTable('service', function(table){
     table.increments().primary()
     table.string('name', 255).notNullable()
     table.string('description', 255).notNullable()
     table.string('type', 255).notNullable()
     table.double('price').notNullable()
+    table.boolean('state').notNullable()
   })
   .createTable('room', function(table){
     table.increments().primary()
@@ -34,6 +37,7 @@ exports.up = function(knex) {
     table.double('price').notNullable()
     table.integer('floor').notNullable()
     table.integer('beds').notNullable()
+    table.boolean('state').notNullable()
   })
   .createTable('season', function(table){
     table.increments().primary()
@@ -42,7 +46,7 @@ exports.up = function(knex) {
     table.date('start').notNullable()
     table.date('end').notNullable()
   })
-  .createTable('facilities', function(table){
+  .createTable('facility', function(table){
     table.increments().primary()
     table.string('name', 255).notNullable()
     table.string('description', 255).notNullable()
@@ -50,7 +54,34 @@ exports.up = function(knex) {
   })
   .createTable('reservation', function(table){
     table.increments().primary()
-    table.date('date').notNullable()
+    table.date('start').notNullable()
+    table.date('end').notNullable()
+    table.boolean('state').notNullable()
+    //Foreign Key
+    table
+       .integer('room_id')
+       .references('id')
+       .inTable('room')
+    table
+       .integer('hall_id')
+       .references('id')
+       .inTable('hall')
+    table
+       .integer('user_id')
+       .references('id')
+       .inTable('user')
+  })
+  .createTable('reservation_service', function(table){
+    //Foreign Key
+    table
+        .integer('reservation_id')
+        .references('id')
+        .inTable('reservation')
+    table
+        .integer('service_id')
+        .references('id')
+        .inTable('service')
+    table.primary(['reservation_id','service_id'])
   })
 };
 
@@ -58,9 +89,9 @@ exports.down = function(knex) {
   return knex.schema
     .dropTable('user')
     .dropTable('hall')
-    .dropTable('services')
+    .dropTable('service')
     .dropTable('room')
     .dropTable('season')
-    .dropTable('facilities')
+    .dropTable('facility')
     .dropTable('reservation')
 };
