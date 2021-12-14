@@ -11,9 +11,9 @@ exports.seed = function(knex) {
       var hall
       for(var i=0;i<total;i++){
         hall = {
-          number: faker.random.number(),
-          floor: faker.random.number(),
-          capacity: faker.random.number(),
+          number: faker.datatype.number(),
+          floor: faker.datatype.number(),
+          capacity: faker.datatype.number(),
           description: faker.lorem.sentence(),
           image: faker.random.image(),
           price: faker.commerce.price(),

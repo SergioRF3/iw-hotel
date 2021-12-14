@@ -13,7 +13,7 @@ exports.seed = function(knex) {
         facility = {
           name: faker.lorem.word(),
           description: faker.commerce.productDescription(),
-          image: faker.image.lorempicsum(),
+          image: faker.random.image(),
         }
         facilities.push(facility)
       }

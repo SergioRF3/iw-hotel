@@ -15,7 +15,7 @@ exports.seed = function(knex) {
         description: faker.commerce.productDescription(),
         type: faker.helpers.randomize(['H', 'S']),
         price: faker.commerce.price(),
-        state: faker.boolean(),
+        state: faker.datatype.boolean(),
       }
       services.push(service)
     }

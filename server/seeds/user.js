@@ -14,10 +14,10 @@ exports.seed = function(knex) {
           name: faker.name.firstName(),
           password: faker.internet.password(),
           email: faker.internet.email(),
-          dni: faker.random.number(),
+          dni: faker.datatype.number(),
           phone: faker.phone.phoneNumber(),
-          type: faker.helpers.randomize(['H','S'])
-          state: faker.datatype.boolean()
+          type: faker.datatype.number({'min': 0, 'max':2}),
+          state: faker.datatype.boolean(),
         }
         users.push(user)
       }

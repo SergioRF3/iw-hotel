@@ -1,3 +1,4 @@
+/** 
 var faker = require('faker')
 
 var total = 50
@@ -23,3 +24,4 @@ exports.seed = function(knex) {
       return knex('reservation').insert(reservations);
     });
 };
+*/

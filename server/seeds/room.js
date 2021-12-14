@@ -11,13 +11,13 @@ exports.seed = function(knex) {
     var room
     for(var i=0;i<total;i++){
       room = {
-        number: faker.number(),
+        number: faker.datatype.number(),
         price: faker.commerce.price(),
-        floor: faker.number(),
-        beds: faker.number(),
+        floor: faker.datatype.number(),
+        beds: faker.datatype.number(),
         views: faker.random.word(),
         image: faker.random.image(),
-        state: faker.boolean(),
+        state: faker.datatype.boolean(),
       }
       rooms.push(room)
     }

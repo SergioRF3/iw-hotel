@@ -11,10 +11,10 @@ exports.seed = function(knex) {
     var season
     for(var i=0;i<total;i++){
       season = {
-        name: faker.random.word(),
-        start: faker.datatype.datetime(),
         end: faker.datatype.datetime(),
         increment: faker.commerce.price(),
+        name: faker.random.word(),
+        start: faker.datatype.datetime(),
       }
       seasons.push(season)
     }

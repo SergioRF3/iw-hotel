@@ -42,7 +42,7 @@ exports.up = function(knex) {
   .createTable('season', function(table){
     table.increments().primary()
     table.string('name', 255).notNullable()
-    table.integer('increments').notNullable()
+    table.double('increment').notNullable()
     table.date('start').notNullable()
     table.date('end').notNullable()
   })
