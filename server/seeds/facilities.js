@@ -11,7 +11,7 @@ exports.seed = function(knex) {
       var facility
       for(var i=0;i<total;i++){
         facility = {
-          name: faker.name.firstName(),
+          name: faker.lorem.word(),
           description: faker.commerce.productDescription(),
           image: faker.image.lorempicsum(),
         }
