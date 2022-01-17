@@ -2,7 +2,7 @@
   <div class="formlogin">
     <div class="cuenta">
       <label id="msg">¿Ya tienes una cuenta?</label> &nbsp;
-      <a href="#">Inicia Sesion</a>
+      <router-link to="/login">Inicia Sesión</router-link>
     </div>
     <div class="field">
       <label class="titulo">Nombre</label>
