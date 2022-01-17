@@ -5,6 +5,7 @@ import InstalacionesComponent from '@/components/InstalacionesComponent.vue'
 import HabitacionesComponent from '@/components/HabitacionesComponent.vue'
 import SalasComponent from '@/components/SalasComponent.vue'
 import LoginComponent from '@/components/LoginComponent.vue'
+import RegistroComponent from '@/components/RegistroComponent.vue'
 
 Vue.use(VueRouter)
 
@@ -37,11 +38,16 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
-  // Ruta para login
+  // Ruta para login y registro
   {
     path: '/login',
     name: 'Login',
     component: LoginComponent
+  },
+  {
+    path: '/registro',
+    name: 'Registro',
+    component: RegistroComponent
   }
 ]
 

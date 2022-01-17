@@ -11,7 +11,7 @@
         <router-link to="/salas">Salas</router-link>
         <router-link to="/about">Sobre nosotros</router-link>
       </nav>
-      <a href="#" class="login">login</a>
+      <router-link class="login" to="/login">Login</router-link>
     </div>
     <div v-if="admin" class="na">
       <div class="logo">
@@ -73,6 +73,7 @@ export default {
 .rv {
   width: 100%;
   margin-top: 10vh;
+  margin-bottom: 10vh;
 }
 .na {
   display: flex;
