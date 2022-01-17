@@ -27,6 +27,7 @@ export default {
     border-radius: 20px;
     font-size: 14px;
     color: #FFFFFF;
+    margin-right: 10px;
 }
 
 </style>

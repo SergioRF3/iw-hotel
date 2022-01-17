@@ -4,6 +4,7 @@ import HomeComponent from '@/components/HomeComponent.vue'
 import InstalacionesComponent from '@/components/InstalacionesComponent.vue'
 import HabitacionesComponent from '@/components/HabitacionesComponent.vue'
 import SalasComponent from '@/components/SalasComponent.vue'
+import LoginComponent from '@/components/LoginComponent.vue'
 
 Vue.use(VueRouter)
 
@@ -35,6 +36,12 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+  },
+  // Ruta para login
+  {
+    path: '/login',
+    name: 'Login',
+    component: LoginComponent
   }
 ]
 

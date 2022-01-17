@@ -1,7 +1,9 @@
 <template>
   <div class="navbar">
     <div v-if="publico" class="na">
-      <img src="#" />
+      <div class="logo">
+        <img src="#"/>
+      </div>
       <nav class="navb">
         <router-link to="/">Home</router-link>
         <router-link to="/instalaciones">Instalaciones</router-link>
@@ -12,7 +14,9 @@
       <a href="#" class="login">login</a>
     </div>
     <div v-if="admin" class="na">
-      <img src="#" />
+      <div class="logo">
+        <img src="#"/>
+      </div>
       <nav class="navb">
         <router-link to="/">Instalaciones</router-link>
         <router-link to="/">Habitaciones</router-link>
@@ -22,7 +26,7 @@
         <router-link to="/">Servicios</router-link>
         <router-link to="/">Temporada</router-link>
       </nav>
-      <a href="#" class="login">login</a>
+      <router-link class="login" to="/login">Login</router-link>
     </div>
     <div class="rv">
       <router-view />
@@ -32,32 +36,44 @@
 
 <script>
 export default {
-    name: 'NavbarComponent',
-    data(){
-        return {
-            publico: false,
-            admin: false
-        }
+  name: "NavbarComponent",
+  data() {
+    return {
+      publico: false,
+      admin: false,
+    };
+  },
+  props: {
+    navbar: {
+      type: String,
+      default: "public",
     },
-    props:{
-        navbar: {
-            type: String,
-            default: "public"
-        }
-    },
-    created() {
-        if(this.navbar == "public"){
-            this.publico = true
-        }else{
-            if(this.navbar == "admin"){
-                this.admin = true
-            }
-        }
+  },
+  created() {
+    if (this.navbar == "public") {
+      this.publico = true;
+    } else {
+      if (this.navbar == "admin") {
+        this.admin = true;
+      }
     }
-}
+  },
+};
 </script>
 
 <style scoped>
+.logo {
+  width: 41px;
+  height: 41px;
+}
+.logo img {
+  width: 100%;
+  height: 100%;
+}
+.rv {
+  width: 100%;
+  margin-top: 10vh;
+}
 .na {
   display: flex;
   flex-direction: row;
