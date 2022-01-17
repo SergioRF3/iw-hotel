@@ -36,7 +36,7 @@ export default {
   background-color: #b5b2b2;
   margin: auto;
   border-radius: 20px;
-  padding: 10px;
+  padding: 30px 30px 10px;
 }
 .field {
   margin-top: 10px;
@@ -78,6 +78,6 @@ export default {
 .botones {
   display: flex;
   flex-flow: row;
-  padding: 10px;
+  padding: 30px 10px 10px;
 }
 </style>

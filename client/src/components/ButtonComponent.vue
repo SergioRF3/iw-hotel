@@ -30,4 +30,8 @@ export default {
     margin-right: 10px;
 }
 
+.button a:hover {
+    color: #f6fb26;
+}
+
 </style>
