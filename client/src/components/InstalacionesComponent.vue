@@ -1,6 +1,6 @@
 <template>
   <div class="instalaciones">
-    <div>
+    <div class="elemento">
       <div class="titulo">TITULO</div>
       <img class="izquierda"/>
       <p class="texto"> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Saepe numquam corporis ipsam nobis porro expedita blanditiis sit magni iusto reprehenderit at illo tempore exercitationem officiis repellat natus hic eos ab, tenetur nesciunt impedit atque veniam a voluptatum? Error corrupti laboriosam nulla eius. Fugit quisquam repellendus, dolor quos facere necessitatibus. Assumenda, dolor, qui at adipisci fugiat voluptatibus voluptatem id rerum error unde veniam hic alias</p>
@@ -26,11 +26,19 @@ export default {
   top: 148px;
 }
 
+.instalaciones .elemento{
+  margin-bottom: 35px;
+}
+
 .instalaciones .titulo{
   width: 84px;
   height: 29px;
   left: 0px;
   top: 0px;
+  font-weight: 900;
+  font-size: 25px;
+  line-height: 29px;
+  margin-bottom: 20px;
   color: #2E2E2E;
 }
 
