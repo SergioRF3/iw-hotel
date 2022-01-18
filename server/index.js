@@ -222,3 +222,191 @@ app.delete('/halls', checkJWT, async function(req,res) {
     await knex('hall').del().where('id', id)
     res.status(200).send('hall ' + id + ' deleted succesfully')
 })
+
+//---------------------------------------------- Service ---------------------------------------------------------
+//View service given an id
+app.get('/services/:id', async function(req,res) {
+    var service = await knex('service').select().where('id',req.params.id)
+    res.status(200).send(service)
+})
+
+//View list of all services
+app.get('/services', async function(req,res) {
+    var currentPage = req.query.page
+    var limit = req.query.limit
+    var search  =req.query.search
+    res.status(200).send(await pagination('service', currentPage, limit, 'name', search))
+})
+
+//Create service
+//Query returns the new autoincremented id
+app.post('/service', checkJWT, async function(req, res) {
+    var service = req.body
+    var id = await knex('service')
+        .insert({name: service.name,
+                type: service.type,
+                description: service.description,
+                price: service.price})
+        .returning('id')
+    res.status(201).send('http://localhost:3000/services/' + id)
+})
+
+//Modify service given an existing one
+app.put('/services', checkJWT, async function(req,res) {
+    var service = req.body
+    await knex('service')
+        .update({number: service.number,
+            floor: service.floor,
+            description: service.description,
+            price: service.price})
+        .where('id', service.id)
+    res.status(201).send('http://localhost:3000/services/' + service.id)
+})
+
+//Deletes service given an id
+app.delete('/services', checkJWT, async function(req,res) {
+    var id = req.body.id
+    await knex('service').del().where('id', id)
+    res.status(200).send('service ' + id + ' deleted succesfully')
+})
+
+//---------------------------------------------- Room ---------------------------------------------------------
+//View room given an id
+app.get('/rooms/:id', async function(req,res) {
+    var room = await knex('room').select().where('id',req.params.id)
+    res.status(200).send(room)
+})
+
+//View list of all rooms
+app.get('/rooms', async function(req,res) {
+    var currentPage = req.query.page
+    var limit = req.query.limit
+    var search  =req.query.search
+    res.status(200).send(await pagination('room', currentPage, limit, 'number', search))
+})
+
+//Create room
+//Query returns the new autoincremented id
+app.post('/room', checkJWT, async function(req, res) {
+    var room = req.body
+    var id = await knex('room')
+        .insert({name: room.name,
+                type: room.type,
+                description: room.description,
+                price: room.price})
+        .returning('id')
+    res.status(201).send('http://localhost:3000/rooms/' + id)
+})
+
+//Modify room given an existing one
+app.put('/rooms', checkJWT, async function(req,res) {
+    var room = req.body
+    await knex('room')
+        .update({number: room.number,
+                floor: room.floor,
+                description: room.description,
+                price: room.price})
+        .where('id', room.id)
+    res.status(201).send('http://localhost:3000/rooms/' + room.id)
+})
+
+//Deletes room given an id
+app.delete('/rooms', checkJWT, async function(req,res) {
+    var id = req.body.id
+    await knex('room').del().where('id', id)
+    res.status(200).send('room ' + id + ' deleted succesfully')
+})
+
+//---------------------------------------------- Season ---------------------------------------------------------
+//View season given an id
+app.get('/seasons/:id', async function(req,res) {
+    var season = await knex('season').select().where('id',req.params.id)
+    res.status(200).send(season)
+})
+
+//View list of all seasons
+app.get('/seasons', async function(req,res) {
+    var currentPage = req.query.page
+    var limit = req.query.limit
+    var search  =req.query.search
+    res.status(200).send(await pagination('season', currentPage, limit, 'name', search))
+})
+
+//Create season
+//Query returns the new autoincremented id
+app.post('/season', checkJWT, async function(req, res) {
+    var season = req.body
+    var id = await knex('season')
+        .insert({number: season.number,
+                increment: season.increment,
+                start: season.start,
+                end: season.end})
+        .returning('id')
+    res.status(201).send('http://localhost:3000/seasons/' + id)
+})
+
+//Modify season given an existing one
+app.put('/seasons', checkJWT, async function(req,res) {
+    var season = req.body
+    await knex('season')
+        .update({number: season.number,
+                increment: season.increment,
+                start: season.start,
+                end: season.end})
+        .where('id', season.id)
+    res.status(201).send('http://localhost:3000/seasons/' + season.id)
+})
+
+//Deletes season given an id
+app.delete('/seasons', checkJWT, async function(req,res) {
+    var id = req.body.id
+    await knex('season').del().where('id', id)
+    res.status(200).send('season ' + id + ' deleted succesfully')
+})
+
+//---------------------------------------------- Facility ---------------------------------------------------------
+//View facility given an id
+app.get('/facilities/:id', async function(req,res) {
+    var facility = await knex('facility').select().where('id',req.params.id)
+    res.status(200).send(facility)
+})
+
+//View list of all facilities
+app.get('/facilities', async function(req,res) {
+    var currentPage = req.query.page
+    var limit = req.query.limit
+    var search  =req.query.search
+    res.status(200).send(await pagination('facility', currentPage, limit, 'name', search))
+})
+
+//Create facility
+//Query returns the new autoincremented id
+app.post('/facility', checkJWT, async function(req, res) {
+    var facility = req.body
+    var id = await knex('facility')
+        .insert({number: facility.number,
+                increment: facility.increment,
+                start: facility.start,
+                end: facility.end})
+        .returning('id')
+    res.status(201).send('http://localhost:3000/facilities/' + id)
+})
+
+//Modify facility given an existing one
+app.put('/facilities', checkJWT, async function(req,res) {
+    var facility = req.body
+    await knex('facility')
+        .update({number: facility.number,
+                increment: facility.increment,
+                start: facility.start,
+                end: facility.end})
+        .where('id', facility.id)
+    res.status(201).send('http://localhost:3000/facilities/' + facility.id)
+})
+
+//Deletes facility given an id
+app.delete('/facilities', checkJWT, async function(req,res) {
+    var id = req.body.id
+    await knex('facility').del().where('id', id)
+    res.status(200).send('facility ' + id + ' deleted succesfully')
+})
