@@ -45,7 +45,7 @@
         <div class="col-8">
           <div class="field">
             <label class="titulo">Estado</label>
-            <input type="text" id="nombre" placeholder="Disponible" />
+            <input type="text" id="estado" placeholder="Disponible" />
           </div>
         </div>
       </div>
