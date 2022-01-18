@@ -18,7 +18,7 @@
         <img src="#"/>
       </div>
       <nav class="navb">
-        <router-link to="/">Instalaciones</router-link>
+        <router-link to="/admin/instalaciones">Instalaciones</router-link>
         <router-link to="/">Habitaciones</router-link>
         <router-link to="/">Salas</router-link>
         <router-link to="/">Usuarios</router-link>
