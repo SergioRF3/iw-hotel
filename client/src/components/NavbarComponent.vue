@@ -26,7 +26,7 @@
         <router-link to="/admin/servicios">Servicios</router-link>
         <router-link to="/admin/temporadas">Temporada</router-link>
       </nav>
-      <router-link class="login" to="/login">Login</router-link>
+      <router-link class="login" to="/perfil">Usuario</router-link>
     </div>
     <div class="rv">
       <router-view />
