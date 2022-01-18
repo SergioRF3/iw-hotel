@@ -87,11 +87,12 @@ exports.up = function(knex) {
 
 exports.down = function(knex) {
   return knex.schema
-    .dropTable('user')
-    .dropTable('hall')
-    .dropTable('service')
-    .dropTable('room')
     .dropTable('season')
     .dropTable('facility')
+    .dropTable('reservation_service')
+    .dropTable('service')
     .dropTable('reservation')
-};
+    .dropTable('room')
+    .dropTable('hall')
+    .dropTable('user')
+    };
