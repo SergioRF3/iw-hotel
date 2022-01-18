@@ -11,7 +11,7 @@
         <div class="col-6">
           <div class="field">
             <label class="titulo">Imagen</label>
-            <input type="text" id="nombre" placeholder="imagen.jpg" />
+            <input type="text" id="imagen" placeholder="imagen.jpg" />
           </div>
         </div>
       </div>
