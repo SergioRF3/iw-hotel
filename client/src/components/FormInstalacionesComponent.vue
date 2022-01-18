@@ -35,25 +35,24 @@
       </div>
     </div>
     <div class="tabla">
-        <table class="table table-dark">
-  <thead>
-    <tr>
-      <th scope="col">Id</th>
-      <th scope="col">Nombre</th>
-      <th scope="col">Descripción</th>
-      <th scope="col">Imagen</th>
-      <th scope="col">Acciones</th>
-    </tr>
-  </thead>
-  <tbody>
-    <!-- <tr v-for="vu in valoresUsuarios" :key="vu.id">
-      <th>{{vu.id}}</th>
-      <td>{{vu.nombre}}</td>
-      <td><button class="btn btn-danger btn-xs" @click="verDetallesUsuario(vu.id)">Ver Detalles</button></td>
-      <td><button class="btn btn-primary btn-xs" @click="borrarUsuario(vu.id, $event)" >X</button></td>
-    </tr>  -->
-  </tbody>
-</table>
+      <table class="table table-dark">
+        <thead>
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Ejemplo para hacer la tabla de las instalaciones
+            <tr v-for="vu in valoresUsuarios" :key="vu.id">
+            <th>{{vu.id}}</th>
+            <td>{{vu.nombre}}</td>
+            <td><button class="btn btn-danger btn-xs" @click="verDetallesUsuario(vu.id)">Ver Detalles</button></td>
+            <td><button class="btn btn-primary btn-xs" @click="borrarUsuario(vu.id, $event)" >X</button></td>
+            </tr>  -->
+        </tbody>
+      </table>
     </div>
   </div>
 </template>
@@ -70,8 +69,8 @@ export default {
 
 <style>
 .tabla {
-    margin: 10vh auto;
-    width: 80%;
+  margin: 10vh auto;
+  width: 80%;
 }
 .form {
   width: 60%;
