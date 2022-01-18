@@ -35,7 +35,7 @@
 import ButtonComponent from "@/components/ButtonComponent.vue";
 
 export default {
-  name: "LoginComponent",
+  name: "RegistroComponent",
   components: {
     ButtonComponent,
   },
