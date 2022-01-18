@@ -1,19 +1,31 @@
 <template>
   <div class="formlogin">
     <div class="cuenta">
-      <label id="msg">No tienes cuenta.</label> &nbsp;
-      <router-link to="/registro">Registrate</router-link>
+      <label id="msg">¿Ya tienes una cuenta?</label> &nbsp;
+      <router-link to="/login">Inicia Sesión</router-link>
     </div>
     <div class="field">
-      <label class="titulo">Usuario</label>
-      <input type="text" id="usuario" placeholder="usuario@usuario.com" />
+      <label class="titulo">Nombre</label>
+      <input type="text" id="nombre" placeholder="Jaume Aragonés" />
+    </div>
+    <div class="field">
+      <label class="titulo">DNI</label>
+      <input type="text" id="dni" placeholder="11111111A" />
+    </div>
+    <div class="field">
+      <label class="titulo">Email</label>
+      <input type="text" id="email" placeholder="usuario@usuario.com" />
     </div>
     <div class="field">
       <label class="titulo">Contraseña</label>
       <input type="password" id="password" placeholder="***********" />
     </div>
+    <div class="field">
+      <label class="titulo">Teléfono</label>
+      <input type="text" id="telefono" placeholder="965123123" />
+    </div>
     <div class="botones">
-      <ButtonComponent nombre="Iniciar Sesión" />
+      <ButtonComponent nombre="Registrarse" />
       <ButtonComponent nombre="Volver" />
     </div>
   </div>
