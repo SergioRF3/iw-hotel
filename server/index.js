@@ -153,7 +153,11 @@ app.post('/users', checkJWT, async function(req, res) {
     var id = await knex('user')
         .insert({email: user.email,
                 name: user.name,
-                password: user.password})
+                password: user.password,
+                dni: user.dni,
+                phone: user.phone,
+                type: user.type,
+                state: user.state})
         .returning('id')
     res.status(201).send('http://localhost:3000/users/' + id)
 })
@@ -164,8 +168,11 @@ app.put('/users', checkJWT, async function(req,res) {
     await knex('user')
         .update({email: user.email,
                 name: user.name,
-                password: user.password})
-        .where('id', user.id)
+                password: user.password,
+                dni: user.dni,
+                phone: user.phone,
+                type: user.type,
+                state: user.state})
     res.status(201).send('http://localhost:3000/users/' + user.id)
 })
 
@@ -198,8 +205,11 @@ app.post('/hall', checkJWT, async function(req, res) {
     var id = await knex('hall')
         .insert({number: hall.number,
                 floor: hall.floor,
+                capacity: hall.capacity,
                 description: hall.description,
-                price: hall.price})
+                image: hall.image,
+                price: hall.price,
+                state: hall.state})
         .returning('id')
     res.status(201).send('http://localhost:3000/halls/' + id)
 })
@@ -209,9 +219,12 @@ app.put('/halls', checkJWT, async function(req,res) {
     var hall = req.body
     await knex('hall')
         .update({number: hall.number,
-            floor: hall.floor,
-            description: hall.description,
-            price: hall.price})
+                floor: hall.floor,
+                capacity: hall.capacity,
+                description: hall.description,
+                image: hall.image,
+                price: hall.price,
+                state: hall.state})
         .where('id', hall.id)
     res.status(201).send('http://localhost:3000/halls/' + hall.id)
 })
@@ -244,9 +257,10 @@ app.post('/service', checkJWT, async function(req, res) {
     var service = req.body
     var id = await knex('service')
         .insert({name: service.name,
-                type: service.type,
                 description: service.description,
-                price: service.price})
+                type: service.type,
+                price: service.price,
+                state: service.state})
         .returning('id')
     res.status(201).send('http://localhost:3000/services/' + id)
 })
@@ -255,10 +269,11 @@ app.post('/service', checkJWT, async function(req, res) {
 app.put('/services', checkJWT, async function(req,res) {
     var service = req.body
     await knex('service')
-        .update({number: service.number,
-            floor: service.floor,
-            description: service.description,
-            price: service.price})
+        .update({name: service.name,
+                description: service.description,
+                type: service.type,
+                price: service.price,
+                state: service.state})
         .where('id', service.id)
     res.status(201).send('http://localhost:3000/services/' + service.id)
 })
@@ -290,10 +305,13 @@ app.get('/rooms', async function(req,res) {
 app.post('/room', checkJWT, async function(req, res) {
     var room = req.body
     var id = await knex('room')
-        .insert({name: room.name,
-                type: room.type,
-                description: room.description,
-                price: room.price})
+        .insert({number: room.number,
+                image: room.image,
+                views: room.views,
+                price: room.price,
+                floor: room.floor,
+                beds: room.beds,
+                state: room.state})
         .returning('id')
     res.status(201).send('http://localhost:3000/rooms/' + id)
 })
@@ -303,9 +321,12 @@ app.put('/rooms', checkJWT, async function(req,res) {
     var room = req.body
     await knex('room')
         .update({number: room.number,
+                image: room.image,
+                views: room.views,
+                price: room.price,
                 floor: room.floor,
-                description: room.description,
-                price: room.price})
+                beds: room.beds,
+                state: room.state})
         .where('id', room.id)
     res.status(201).send('http://localhost:3000/rooms/' + room.id)
 })
@@ -337,7 +358,7 @@ app.get('/seasons', async function(req,res) {
 app.post('/season', checkJWT, async function(req, res) {
     var season = req.body
     var id = await knex('season')
-        .insert({number: season.number,
+        .insert({name: season.name,
                 increment: season.increment,
                 start: season.start,
                 end: season.end})
@@ -349,7 +370,7 @@ app.post('/season', checkJWT, async function(req, res) {
 app.put('/seasons', checkJWT, async function(req,res) {
     var season = req.body
     await knex('season')
-        .update({number: season.number,
+        .update({name: season.name,
                 increment: season.increment,
                 start: season.start,
                 end: season.end})
@@ -410,3 +431,98 @@ app.delete('/facilities', checkJWT, async function(req,res) {
     await knex('facility').del().where('id', id)
     res.status(200).send('facility ' + id + ' deleted succesfully')
 })
+
+//---------------------------------------------- Reservation ---------------------------------------------------------
+//View reservation given an id
+app.get('/reservations/:id', async function(req,res) {
+    var reservation = await knex('reservation').select().where('id',req.params.id)
+    res.status(200).send(reservation)
+})
+
+//View list of all reservations
+app.get('/reservations', async function(req,res) {
+    var currentPage = req.query.page
+    var limit = req.query.limit
+    var search  =req.query.search
+    res.status(200).send(await pagination('reservation', currentPage, limit, 'name', search))
+})
+
+//Create reservation
+//Query returns the new autoincremented id
+app.post('/reservation', checkJWT, async function(req, res) {
+    var reservation = req.body
+    var id = await knex('reservation')
+        .insert({start: reservation.start,
+                end: reservation.end,
+                state: reservation.state,
+                room_id: reservation.room_id,
+                hall_id: reservation.hall_id,
+                user_id: reservation.user_id,})
+        .returning('id')
+    res.status(201).send('http://localhost:3000/reservations/' + id)
+})
+
+//Modify reservation given an existing one
+app.put('/reservations', checkJWT, async function(req,res) {
+    var reservation = req.body
+    await knex('reservation')
+        .update({start: reservation.start,
+                end: reservation.end,
+                state: reservation.state,
+                room_id: reservation.room_id,
+                hall_id: reservation.hall_id,
+                user_id: reservation.user_id,})
+        .where('id', reservation.id)
+    res.status(201).send('http://localhost:3000/reservations/' + reservation.id)
+})
+
+//Deletes reservation given an id
+app.delete('/reservations', checkJWT, async function(req,res) {
+    var id = req.body.id
+    await knex('reservation').del().where('id', id)
+    res.status(200).send('reservation ' + id + ' deleted succesfully')
+})
+
+//---------------------------------------------- Reservation_Service ---------------------------------------------------------
+//View reservation_service given an id
+app.get('/reservation_services/:id', async function(req,res) {
+    var reservation_service = await knex('reservation_service').select().where('id',req.params.id)
+    res.status(200).send(reservation_service)
+})
+
+//View list of all reservation_services
+app.get('/reservation_services', async function(req,res) {
+    var currentPage = req.query.page
+    var limit = req.query.limit
+    var search  =req.query.search
+    res.status(200).send(await pagination('reservation_service', currentPage, limit, 'id', search))
+})
+
+//Create reservation_service
+//Query returns the new autoincremented id
+app.post('/reservation_service', checkJWT, async function(req, res) {
+    var reservation_service = req.body
+    var id = await knex('reservation_service')
+        .insert({reservation_id: reservation_service.reservation_id,
+                service_id: reservation_service.service_id})
+        .returning('id')
+    res.status(201).send('http://localhost:3000/reservation_services/' + id)
+})
+
+//Modify reservation_service given an existing one
+app.put('/reservation_services', checkJWT, async function(req,res) {
+    var reservation_service = req.body
+    await knex('reservation_service')
+        .update({reservation_id: reservation_service.reservation_id,
+                service_id: reservation_service.service_id})
+        .where('id', reservation_service.id)
+    res.status(201).send('http://localhost:3000/reservation_services/' + reservation_service.id)
+})
+
+//Deletes reservation_service given an id
+app.delete('/reservation_services', checkJWT, async function(req,res) {
+    var id = req.body.id
+    await knex('reservation_service').del().where('id', id)
+    res.status(200).send('reservation_service ' + id + ' deleted succesfully')
+})
+
