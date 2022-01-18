@@ -10,28 +10,28 @@
         </div>
         <div class="col-4">
           <div class="field">
-            <label class="titulo">Precio</label>
-            <input type="text" id="precio" placeholder="150" />
+            <label class="titulo">Planta</label>
+            <input type="text" id="planta" placeholder="0" />
           </div>
         </div>
         <div class="col-4">
           <div class="field">
-            <label class="titulo">Planta</label>
-            <input type="text" id="planta" placeholder="2" />
+            <label class="titulo">Aforo</label>
+            <input type="text" id="aforo" placeholder="90" />
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-4">
           <div class="field">
-            <label class="titulo">Número de habitaciones</label>
-            <input type="text" id="habitaciones" placeholder="1" />
+            <label class="titulo">Precio</label>
+            <input type="text" id="precio" placeholder="60" />
           </div>
         </div>
         <div class="col-8">
           <div class="field">
-            <label class="titulo">Vistas</label>
-            <input type="text" id="vistas" placeholder="Vistas al mar" />
+            <label class="titulo">Descripción</label>
+            <input type="text" id="descripcion" placeholder="Aire acondicionado, wifi" />
           </div>
         </div>
       </div>
@@ -61,8 +61,7 @@
             <th scope="col">Id</th>
             <th scope="col">Número</th>
             <th scope="col">Precio</th>
-            <th scope="col">Planta</th>
-            <th scope="col">NumCamas</th>
+            <th scope="col">Aforo</th>
             <th scope="col">Estado</th>
             <th scope="col">Acciones</th>
           </tr>
@@ -82,14 +81,15 @@
 </template>
 
 <script>
-import ButtonComponent from "@/components/ButtonComponent.vue";
+import ButtonComponent from '@/components/ButtonComponent.vue'
 export default {
-  name: "FormHabitacionesComponent",
-  components: {
-    ButtonComponent,
-  },
-};
+    name: 'FormSalasComponent',
+    components: {
+        ButtonComponent
+    }
+}
 </script>
 
 <style>
+
 </style>
