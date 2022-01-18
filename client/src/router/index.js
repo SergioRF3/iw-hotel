@@ -9,6 +9,7 @@ import RegistroComponent from '@/components/RegistroComponent.vue'
 import FormInstalacionesComponent from '@/components/FormInstalacionesComponent.vue'
 import FormHabitacionesComponent from '@/components/FormHabitacionesComponent.vue'
 import FormSalasComponent from '@/components/FormSalasComponent.vue'
+import FormUsuariosComponent from '@/components/FormUsuariosComponent.vue'
 
 Vue.use(VueRouter)
 
@@ -67,6 +68,11 @@ const routes = [
     path: '/admin/salas',
     name: 'SalasAdmim',
     component: FormSalasComponent
+  },
+  {
+    path: '/admin/usuarios',
+    name: 'UsuariosAdmim',
+    component: FormUsuariosComponent
   },
 ]
 

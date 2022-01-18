@@ -1,5 +1,5 @@
 <template>
-  <div class="form"><h2>Pagina de formulario de usuarios admin</h2><ButtonConmponent /></div>
+  <div class="form"><h2>Pagina de formulario de usuarios admin</h2><ButtonComponent /></div>
 </template>
 
 <script>
