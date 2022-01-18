@@ -6,6 +6,7 @@ import HabitacionesComponent from '@/components/HabitacionesComponent.vue'
 import SalasComponent from '@/components/SalasComponent.vue'
 import LoginComponent from '@/components/LoginComponent.vue'
 import RegistroComponent from '@/components/RegistroComponent.vue'
+import FormInstalacionesComponent from '@/components/FormInstalacionesComponent.vue'
 
 Vue.use(VueRouter)
 
@@ -48,7 +49,13 @@ const routes = [
     path: '/registro',
     name: 'Registro',
     component: RegistroComponent
-  }
+  },
+  // Rutas para admin
+  {
+    path: '/admin/instalaciones',
+    name: 'InstalacionesAdmim',
+    component: FormInstalacionesComponent
+  },
 ]
 
 const router = new VueRouter({
