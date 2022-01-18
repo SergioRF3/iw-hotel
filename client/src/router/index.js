@@ -13,6 +13,7 @@ import FormUsuariosComponent from '@/components/FormUsuariosComponent.vue'
 import FormReservasComponent from '@/components/FormReservasComponent.vue'
 import FormServiciosComponent from '@/components/FormServiciosComponent.vue'
 import FormTemporadasComponent from '@/components/FormTemporadasComponent.vue'
+import PerfilComponent from '@/components/PerfilComponent.vue'
 
 Vue.use(VueRouter)
 
@@ -45,7 +46,7 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
-  // Ruta para login y registro
+  // Ruta para login y registro y perfil
   {
     path: '/login',
     name: 'Login',
@@ -55,6 +56,11 @@ const routes = [
     path: '/registro',
     name: 'Registro',
     component: RegistroComponent
+  },
+  {
+    path: '/perfil',
+    name: 'Perfil',
+    component: PerfilComponent
   },
   // Rutas para admin
   {
