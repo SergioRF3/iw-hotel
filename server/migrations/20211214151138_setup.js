@@ -57,6 +57,7 @@ exports.up = function(knex) {
     table.date('start').notNullable()
     table.date('end').notNullable()
     table.boolean('state').notNullable()
+    table.double('total').notNullable()
     //Foreign Key
     table
        .integer('room_id')
