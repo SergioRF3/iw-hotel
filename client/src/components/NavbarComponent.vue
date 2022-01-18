@@ -5,7 +5,7 @@
         <img src="#"/>
       </div>
       <nav class="navb">
-        <router-link to="/">Home</router-link>
+        <router-link to="/"><b-icon-house-door-fill scale="1.3" /></router-link>
         <router-link to="/instalaciones">Instalaciones</router-link>
         <router-link to="/habitaciones">Habitaciones</router-link>
         <router-link to="/salas">Salas</router-link>
