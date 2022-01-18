@@ -20,7 +20,7 @@
       <nav class="navb">
         <router-link to="/admin/instalaciones">Instalaciones</router-link>
         <router-link to="/admin/habitaciones">Habitaciones</router-link>
-        <router-link to="/">Salas</router-link>
+        <router-link to="/admin/salas">Salas</router-link>
         <router-link to="/">Usuarios</router-link>
         <router-link to="/">Reservas</router-link>
         <router-link to="/">Servicios</router-link>
