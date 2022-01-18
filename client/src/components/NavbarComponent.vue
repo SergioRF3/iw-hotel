@@ -22,7 +22,7 @@
         <router-link to="/admin/habitaciones">Habitaciones</router-link>
         <router-link to="/admin/salas">Salas</router-link>
         <router-link to="/admin/usuarios">Usuarios</router-link>
-        <router-link to="/">Reservas</router-link>
+        <router-link to="/admin/reservas">Reservas</router-link>
         <router-link to="/">Servicios</router-link>
         <router-link to="/">Temporada</router-link>
       </nav>

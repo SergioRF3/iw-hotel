@@ -10,6 +10,7 @@ import FormInstalacionesComponent from '@/components/FormInstalacionesComponent.
 import FormHabitacionesComponent from '@/components/FormHabitacionesComponent.vue'
 import FormSalasComponent from '@/components/FormSalasComponent.vue'
 import FormUsuariosComponent from '@/components/FormUsuariosComponent.vue'
+import FormReservasComponent from '@/components/FormReservasComponent.vue'
 
 Vue.use(VueRouter)
 
@@ -73,6 +74,11 @@ const routes = [
     path: '/admin/usuarios',
     name: 'UsuariosAdmim',
     component: FormUsuariosComponent
+  },
+  {
+    path: '/admin/reservas',
+    name: 'ReservasAdmim',
+    component: FormReservasComponent
   },
 ]
 
