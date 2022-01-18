@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import ButtonComponent from '@/components/ButtonComponents.vue'
+import ButtonComponent from '@/components/ButtonComponent.vue'
 
 export default {
     name: 'FormReservasComponent',
