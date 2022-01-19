@@ -54,20 +54,21 @@ export default {
       }
     )
   },
+  methods: {
+    getHalls(){
+      SalaService.getHalls(this.capacity, this.price).then(
+        response =>{
+          this.salas = response.data  
+        }
+      )
+    }
+  },
   watch: {
     capacity(){
-      SalaService.getHalls(this.capacity, this.price).then(
-        response =>{
-          this.salas = response.data  
-        }
-      )
+      this.getHalls()
     },
     price(){
-      SalaService.getHalls(this.capacity, this.price).then(
-        response =>{
-          this.salas = response.data  
-        }
-      )
+      this.getHalls()
     }
   }
 };

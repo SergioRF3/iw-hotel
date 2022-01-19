@@ -303,10 +303,26 @@ app.get('/rooms/:id', async function(req,res) {
 
 //View list of all rooms
 app.get('/rooms', async function(req,res) {
-    var currentPage = req.query.page
-    var limit = req.query.limit
-    var search  =req.query.search
-    res.status(200).send(await pagination('room', currentPage, limit, 'number', search))
+    var beds = req.query.beds
+    var views = req.query.views
+    var price  = req.query.price
+    var room = await knex('room').select()
+    .modify(function(queryBuilder) {
+        if (price != 0) {
+            queryBuilder.where('price', '<', price)
+        }
+    })
+    .modify(function(queryBuilder) {
+        if (beds != 0) {
+            queryBuilder.where('beds', beds)
+        }
+    })
+    .modify(function(queryBuilder) {
+        if (views != 0) {
+            queryBuilder.where('views', views)
+        }
+    })
+    res.status(200).send(room)
 })
 
 //Create room
