@@ -8,9 +8,6 @@ var app  = express()
 app.use(express.json())
 app.use(cors())
 
-var app  = express()
-app.use(express.json())
-
 const knex = require('knex')({
     client: 'pg',
     connection: {

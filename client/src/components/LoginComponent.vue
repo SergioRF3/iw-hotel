@@ -6,26 +6,42 @@
     </div>
     <div class="field">
       <label class="titulo">Usuario</label>
-      <input type="text" id="usuario" placeholder="usuario@usuario.com" />
+      <input v-model="email" type="text" id="usuario" placeholder="usuario@usuario.com" />
     </div>
     <div class="field">
       <label class="titulo">Contraseña</label>
-      <input type="password" id="password" placeholder="***********" />
+      <input v-model="password" type="password" id="password" placeholder="***********" />
     </div>
     <div class="botones">
-      <ButtonComponent nombre="Iniciar Sesión" />
+      <ButtonComponent nombre="Iniciar Sesión" @click="checkLogin()"/>
+      <button @click="checkLogin()">{{email}}</button>
       <ButtonComponent nombre="Volver" />
     </div>
   </div>
 </template>
 
 <script>
-import ButtonComponent from "@/components/ButtonComponent.vue";
+import ButtonComponent from "@/components/ButtonComponent.vue"
+import AuthService from "@/services/auth.service.js"
 
 export default {
   name: "LoginComponent",
+  data() {
+    return {
+      email: '',
+      password: '',
+    }
+  },
   components: {
     ButtonComponent,
+  },
+  methods: {
+      checkLogin(){
+        console.log(this.email + " " + this.password)
+        if(AuthService.login(this.email, this.password)){
+          //this.$router.push('/')
+        }
+     } 
   },
 };
 </script>
