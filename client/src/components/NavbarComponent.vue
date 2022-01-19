@@ -24,7 +24,8 @@
         <router-link to="/salas">Salas</router-link>
         <router-link to="/about">Sobre nosotros</router-link>
       </nav>
-      <router-link class="login" to="/login">Login</router-link>
+      <router-link class="login" to="/perfil">{{user}}</router-link>
+      <router-link class="login" to="/" @click.native="removeCredentials(), $emit('profileChange')">Logout</router-link>
     </div>
     <div v-if="navbar == 'admin'" class="na">
       <div class="logo">
@@ -45,9 +46,21 @@
 </template>
 
 <script>
+import AuthService from "@/services/auth.service.js"
+
 export default {
   name: "NavbarComponent",
-  props: ['navbar']
+  data() {
+    return {
+      user: localStorage.getItem('name')
+    }
+  },
+  props: ['navbar'],
+  methods: {
+    removeCredentials(){
+      AuthService.logout()
+    }
+  },
 };
 </script>
 
