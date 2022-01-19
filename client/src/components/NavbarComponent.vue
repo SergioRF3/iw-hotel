@@ -40,7 +40,8 @@
         <router-link to="/admin/servicios">Servicios</router-link>
         <router-link to="/admin/temporadas">Temporada</router-link>
       </nav>
-      <router-link class="login" to="/perfil">Usuario</router-link>
+      <router-link class="login" to="/perfil">{{user}}</router-link>
+      <router-link class="login" to="/" @click.native="removeCredentials(), $emit('profileChange')">Logout</router-link>
     </div>
   </div>
 </template>
