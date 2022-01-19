@@ -199,7 +199,7 @@ app.get('/halls', async function(req,res) {
 
 //Create hall
 //Query returns the new autoincremented id
-app.post('/hall', checkJWT, async function(req, res) {
+app.post('/halls', checkJWT, async function(req, res) {
     var hall = req.body
     var id = await knex('hall')
         .insert({number: hall.number,
@@ -252,7 +252,7 @@ app.get('/services', async function(req,res) {
 
 //Create service
 //Query returns the new autoincremented id
-app.post('/service', checkJWT, async function(req, res) {
+app.post('/services', checkJWT, async function(req, res) {
     var service = req.body
     var id = await knex('service')
         .insert({name: service.name,
@@ -301,7 +301,7 @@ app.get('/rooms', async function(req,res) {
 
 //Create room
 //Query returns the new autoincremented id
-app.post('/room', checkJWT, async function(req, res) {
+app.post('/rooms', checkJWT, async function(req, res) {
     var room = req.body
     var id = await knex('room')
         .insert({number: room.number,
