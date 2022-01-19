@@ -1,6 +1,6 @@
 <template>
   <div class="navbar">
-    <div v-if="publico" class="na">
+    <div v-if="navbar == 'public'" class="na">
       <div class="logo">
         <img src="#"/>
       </div>
@@ -13,7 +13,20 @@
       </nav>
       <router-link class="login" to="/login">Login</router-link>
     </div>
-    <div v-if="admin" class="na">
+    <div v-if="navbar == 'usuario'" class="na">
+      <div class="logo">
+        <img src="#"/>
+      </div>
+      <nav class="navb">
+        <router-link to="/"><b-icon-house-door-fill scale="1.3" /></router-link>
+        <router-link to="/instalaciones">Instalaciones</router-link>
+        <router-link to="/habitaciones">Habitaciones</router-link>
+        <router-link to="/salas">Salas</router-link>
+        <router-link to="/about">Sobre nosotros</router-link>
+      </nav>
+      <router-link class="login" to="/login">Login</router-link>
+    </div>
+    <div v-if="navbar == 'admin'" class="na">
       <div class="logo">
         <img src="#"/>
       </div>
@@ -28,36 +41,13 @@
       </nav>
       <router-link class="login" to="/perfil">Usuario</router-link>
     </div>
-    <div class="rv">
-      <router-view />
-    </div>
   </div>
 </template>
 
 <script>
 export default {
   name: "NavbarComponent",
-  data() {
-    return {
-      publico: false,
-      admin: false,
-    };
-  },
-  props: {
-    navbar: {
-      type: String,
-      default: "public",
-    },
-  },
-  created() {
-    if (this.navbar == "public") {
-      this.publico = true;
-    } else {
-      if (this.navbar == "admin") {
-        this.admin = true;
-      }
-    }
-  },
+  props: ['navbar']
 };
 </script>
 
@@ -70,11 +60,7 @@ export default {
   width: 100%;
   height: 100%;
 }
-.rv {
-  width: 100%;
-  margin-top: 10vh;
-  margin-bottom: 10vh;
-}
+ 
 .na {
   display: flex;
   flex-direction: row;
@@ -97,6 +83,7 @@ export default {
   padding: 10px 15px;
   background: #000000;
   border-radius: 30px;
+  margin-bottom: 10vh;
 }
 
 .navb a {

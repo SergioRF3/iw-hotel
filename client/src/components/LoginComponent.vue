@@ -40,6 +40,7 @@ export default {
       AuthService.login(this.email, this.password).then(
         response => {
           if(response == 200){
+            this.$emit('profileChange')
             this.$router.push('/')
           }
         }
