@@ -47,40 +47,63 @@
       </div>
     </div>
     <div class="tabla">
-      <table class="table table-dark">
-        <thead>
-          <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Tipo</th>
-            <th scope="col">Estado</th>
-            <th scope="col">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Ejemplo para hacer la tabla de las usuarios
-            <tr v-for="vu in valoresUsuarios" :key="vu.id">
-            <th>{{vu.id}}</th>
-            <td>{{vu.nombre}}</td>
-            <td><button class="btn btn-danger btn-xs" @click="verDetallesUsuario(vu.id)">Ver Detalles</button></td>
-            <td><button class="btn btn-primary btn-xs" @click="borrarUsuario(vu.id, $event)" >X</button></td>
-            </tr>  -->
-        </tbody>
-      </table>
+      <b-table striped hover :fields="fields" :items="usuarios">
+        <template #cell(actions)>
+          <div class="acciones">
+            <ButtonComponent nombre="Ver Detalles" />
+            <ButtonComponent nombre="Borrar" />
+          </div>
+        </template>
+      </b-table>
     </div>
   </div>
 </template>
 
 <script>
-import ButtonComponent from '@/components/ButtonComponent.vue'
+import ButtonComponent from "@/components/ButtonComponent.vue";
+import UserService from "@/services/user.service.js";
+
 export default {
-    name: 'FormUsuariosComponent',
-    components: {
-        ButtonComponent
-    }
-}
+  name: "FormUsuariosComponent",
+  data() {
+    return {
+      usuarios: [],
+      fields: [
+        {
+          key: "id",
+          label: "Id",
+        },
+        {
+          key: "name",
+          label: "Nombre",
+        },
+        {
+          key: "type",
+          label: "Tipo",
+        },
+        {
+          key: "state",
+          label: "Estado",
+        },
+        {
+          key: "actions",
+          label: "Acciones",
+        },
+      ],
+    };
+  },
+  components: {
+    ButtonComponent,
+  },
+  created() {
+    UserService.getUsers().then((res) => {
+      if (res.status == 200) {
+        this.usuarios = res.data.data;
+      }
+    });
+  },
+};
 </script>
 
 <style>
-
 </style>
