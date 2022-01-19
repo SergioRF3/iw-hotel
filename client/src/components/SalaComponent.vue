@@ -2,7 +2,7 @@
   <div>
     <div>
       <div class="sindividual">
-        <img class="imagenSala" />
+        <img class="imagenSala" :src="sala.image"/>
         <div class="datosSala">
           <label>Precio/dia: </label>
           <p>{{sala.price}} </p>

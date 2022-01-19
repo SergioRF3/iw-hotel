@@ -14,7 +14,6 @@
     </div>
     <div class="botones">
       <ButtonComponent nombre="Iniciar Sesión" @click="checkLogin()"/>
-      <button @click="checkLogin()">Iniciar sesion</button>
       <ButtonComponent nombre="Volver" />
     </div>
   </div>

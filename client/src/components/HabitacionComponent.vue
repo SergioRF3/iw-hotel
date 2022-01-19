@@ -1,7 +1,7 @@
 <template>
     <div>
       <div class="hindividual">
-        <img class="imagenHabitacion" />
+        <img class="imagenHabitacion" :src="habitacion.image"/>
         <div class="datosHabitacion">
           <label>Precio/noche: </label>
           <p>{{habitacion.price}} </p>
