@@ -19,7 +19,7 @@ class UserService {
         return axios.post(API_URL, {'email': email, 'name': name, 'password': password, 'dni': dni,'phone': phone, 'type': type ,'state': state}, {headers: {'authorization': 'Bearer ' + store.getters.getToken}})
     }
 
-    modifyUser(id, name, description, type, price, state){
+    modifyUser(id, email, name, password, dni, phone, type, state){
         return axios.put(API_URL, {'id': id, 'email': email, 'name': name, 'password': password, 'dni': dni,'phone': phone, 'type': type ,'state': state}, {headers: {'authorization': 'Bearer ' + store.getters.getToken}})
     }
 }

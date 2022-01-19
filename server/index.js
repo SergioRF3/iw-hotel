@@ -454,6 +454,7 @@ app.post('/reservation', checkJWT, async function(req, res) {
         .insert({start: reservation.start,
                 end: reservation.end,
                 state: reservation.state,
+                total: reservation.total,
                 room_id: reservation.room_id,
                 hall_id: reservation.hall_id,
                 user_id: reservation.user_id,})
@@ -468,6 +469,7 @@ app.put('/reservations', checkJWT, async function(req,res) {
         .update({start: reservation.start,
                 end: reservation.end,
                 state: reservation.state,
+                total: reservation.total,
                 room_id: reservation.room_id,
                 hall_id: reservation.hall_id,
                 user_id: reservation.user_id,})
