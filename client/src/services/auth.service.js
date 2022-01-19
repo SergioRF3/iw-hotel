@@ -25,9 +25,11 @@ class AuthService {
             }
         )
     }
-    
     logout(){
-        console.log("deslogeuado")
+        localStorage.removeItem('email')
+        localStorage.removeItem('name')
+        localStorage.removeItem('type')
+        localStorage.removeItem('token')
     }
 }
 
