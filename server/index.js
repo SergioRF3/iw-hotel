@@ -83,7 +83,7 @@ async function pagination(table, currentPage, limit, order, search){
 app.post('/login', async function(req, res){
   var email = req.body.email
   var password = req.body.password
-  var users = await knex('users').select().where('email',email)
+  var users = await knex('user').select().where('email',email)
   var user = users[0]
   if (user && user.password==password) {
       var payload = {
@@ -92,7 +92,9 @@ app.post('/login', async function(req, res){
       }
       var token = jwt.encode(payload, secret)
       res.send({
-          user: user.email,
+          email: user.email,
+          name: user.name,
+          type: user.type,
           Bearer: token,
       })
   }

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <NavbarComponent navbar="admin" />
+    <NavbarComponent navbar="public" />
   </div>
 </template>
 
