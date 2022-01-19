@@ -22,92 +22,45 @@
       <input class="listadesplegablesalas" id="fechaEntrada" type="date">
       <label class="labelSala">Salida:</label>
       <input class="listadesplegablesalas" id="fechaSalida" type="date">
-
-
     </div>
-    <div>
-      <div class="sindividual">
-        <img class="imagenSala" />
-        <div class="datosSala">
-          <label>Precio/dia: </label>
-          <p>175</p>
-          <label>€</label>
-        </div>
-        <div class="datosSala">
-          <label>Aforo: </label>
-          <p>200</p>
-        </div>
-        <div class="datosSala">
-          <p>Esta sala con capacidad de 200 personas...</p>
-        </div>
-        <div class="datosSala">
-          <div class="botonesSala">
-            <ButtonComponent nombre="Reservar" />
-            <ButtonComponent nombre="Bloquear" />
-            <ButtonComponent nombre="Desbloquear" />
-          </div>
-        </div>
-
-      </div>
-    </div>
+    <ul v-for="sala in salas" :key="sala.id">
+      <li>
+        <SalaComponent :sala=sala></SalaComponent>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
-import ButtonComponent from "@/components/ButtonComponent.vue";
+import SalaComponent from '@/components/SalaComponent.vue'
+import SalaService from '@/services/hall.service.js'
 
 export default {
-    name:'SalasComponent',
-    components: {
-      ButtonComponent,
+  name:'SalasComponent',
+  components: {
+    SalaComponent
+  },
+  data() {
+    return {
+      salas: ''
     }
+  },
+  created() {
+    SalaService.getHalls().then(
+      response =>{
+        this.salas = response.data.data
+      }
+    )
+  },
 };
 </script>
 
 <style>
 
-.salas{
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 0px 50px;
-  position: absolute;
-  justify-content: space-between;
-
-  width: 1280px;
-  height: 49px;
-  left: 0px;
-  top: 189px;
-}
-
-.salas .listadesplegablesalas {
-  background: #B7B6B6;
-  border-radius: 20px;
-  padding: 10px 20px;
-  cursor: pointer;
-  margin-right: 20px;
-  transition: background .5s;
-}
-
-.salas .labelSala{
-
-  align-items: flex-start;
-  padding: 10px;
-
-  position: static;
-  width: 106px;
-  height: 49px;
-  left: 0px;
-  top: 0px;
-}
-
-.listadesplegablesalas:hover {
-  background: rgb(143, 143, 143);
-}
 
 .sindividual{
-  position: absolute;
-  margin-top: 50px;
+  margin: auto;
+  margin-top: 125px;
   width: 906px;
   height: 339px;
   left: 187px;
