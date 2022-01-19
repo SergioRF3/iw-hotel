@@ -29,44 +29,36 @@
       <input class="listadesplegable" id="fechaEntrada" type="date">
       <label class="labelHabitacion">Salida:</label>
       <input class="listadesplegable" id="fechaSalida" type="date">
-
-
     </div>
-    <div>
-      <div class="hindividual">
-        <img class="imagenHabitacion" />
-        <div class="datosHabitacion">
-          <label>Precio/noche: </label>
-          <p>100</p>
-          <label>€</label>
-        </div>
-        <div class="datosHabitacion">
-          <label>Nº de camas: </label>
-          <p>2</p>
-        </div>
-        <div class="datosHabitacion">
-          <label>Vistas: </label>
-          <p>Playa</p>
-        </div>
-        <div class="botonesHabitacion">
-          <ButtonComponent nombre="Reservar" />
-          <ButtonComponent nombre="Bloquear" />
-          <ButtonComponent nombre="Desbloquear" />
-        </div>
-
-      </div>
-    </div>
+    <ul v-for="habitacion in habitaciones" :key="habitacion.id">
+      <li>
+        <HabitacionComponent :habitacion=habitacion></HabitacionComponent>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
-import ButtonComponent from "@/components/ButtonComponent.vue";
+import HabitacionComponent from "@/components/HabitacionComponent.vue";
+import HabitacionService from '@/services/room.service.js'
 
 export default {
-    name: 'HabitacionesComponent',
-    components: {
-      ButtonComponent,
+  name: 'HabitacionesComponent',
+  components: {
+    HabitacionComponent
+  },
+  data() {
+    return {
+      habitaciones: ''
     }
+  },
+  created() {
+    HabitacionService.getRooms().then(
+      response =>{
+        this.habitaciones = response.data.data
+      }
+    )
+  },
 };
 </script>
 

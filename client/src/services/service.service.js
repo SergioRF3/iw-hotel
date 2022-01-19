@@ -12,15 +12,15 @@ class ServiceService {
     }
     
     deleteService(id){
-        return axios.delete(API_URL,  {data: {'id': id}, headers: {'authorization': 'Bearer ' + store.getters.getToken}})
+        return axios.delete(API_URL,  {data: {'id': id}, headers: {'authorization': 'Bearer ' + localStorage.getItem('token')}})
     }
 
     createService(name, description, type, price, state){
-        return axios.post(API_URL, {'name': name, 'description': description, 'type': type, 'price': price, 'state': state}, {headers: {'authorization': 'Bearer ' + store.getters.getToken}})
+        return axios.post(API_URL, {'name': name, 'description': description, 'type': type, 'price': price, 'state': state}, {headers: {'authorization': 'Bearer ' + localStorage.getItem('token')}})
     }
 
     modifyService(id, name, description, type, price, state){
-        return axios.put(API_URL, {'id': id, 'name': name, 'description': description, 'type': type, 'price': price, 'state': state}, {headers: {'authorization': 'Bearer ' + store.getters.getToken}})
+        return axios.put(API_URL, {'id': id, 'name': name, 'description': description, 'type': type, 'price': price, 'state': state}, {headers: {'authorization': 'Bearer ' + localStorage.getItem('token')}})
     }
 }
 
