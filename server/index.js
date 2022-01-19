@@ -191,10 +191,20 @@ app.get('/halls/:id', async function(req,res) {
 
 //View list of all halls
 app.get('/halls', async function(req,res) {
-    var currentPage = req.query.page
-    var limit = req.query.limit
-    var search  =req.query.search
-    res.status(200).send(await pagination('hall', currentPage, limit, 'number', search))
+    var capacity = req.query.capacity
+    var price = req.query.price
+    var hall = await knex('hall').select()
+    .modify(function(queryBuilder) {
+        if (price != 0) {
+            queryBuilder.where('price', '<',price)
+        }
+    })
+    .modify(function(queryBuilder) {
+        if (capacity != 0) {
+            queryBuilder.where('capacity', '>' ,capacity)
+        }
+    })
+    res.status(200).send(hall)
 })
 
 //Create hall
