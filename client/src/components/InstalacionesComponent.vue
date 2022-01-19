@@ -1,9 +1,9 @@
 <template>
-  <div class="instalaciones">
-    <div class="elemento">
-      <div class="titulo">TITULO</div>
-      <img class="izquierda"/>
-      <p class="texto"> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Saepe numquam corporis ipsam nobis porro expedita blanditiis sit magni iusto reprehenderit at illo tempore exercitationem officiis repellat natus hic eos ab, tenetur nesciunt impedit atque veniam a voluptatum? Error corrupti laboriosam nulla eius. Fugit quisquam repellendus, dolor quos facere necessitatibus. Assumenda, dolor, qui at adipisci fugiat voluptatibus voluptatem id rerum error unde veniam hic alias</p>
+  <div class="instalaciones-public">
+    <div class="elemento-instalacion">
+      <div class="titulo-instalacion">TITULO</div>
+      <img class="izquierda-instalacion"/>
+      <p class="texto-instalacion"> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Saepe numquam corporis ipsam nobis porro expedita blanditiis sit magni iusto reprehenderit at illo tempore exercitationem officiis repellat natus hic eos ab, tenetur nesciunt impedit atque veniam a voluptatum? Error corrupti laboriosam nulla eius. Fugit quisquam repellendus, dolor quos facere necessitatibus. Assumenda, dolor, qui at adipisci fugiat voluptatibus voluptatem id rerum error unde veniam hic alias</p>
 
     </div>
 
@@ -18,7 +18,7 @@ export default {
 
 <style>
 
-.instalaciones{
+.instalaciones-public{
   margin: auto;
   width: 1113px;
   height: 339px;
@@ -26,11 +26,11 @@ export default {
   top: 148px;
 }
 
-.instalaciones .elemento{
+.instalaciones-public .elemento-instalacion{
   margin-bottom: 35px;
 }
 
-.instalaciones .titulo{
+.instalaciones-public .titulo-instalacion{
   width: 84px;
   height: 29px;
   left: 0px;
@@ -42,7 +42,7 @@ export default {
   color: #2E2E2E;
 }
 
-.instalaciones .izquierda{
+.instalaciones-public .izquierda-instalacion{
   float: left;
   margin-right: 30px;
   border-radius: 20px;
@@ -52,7 +52,7 @@ export default {
   top: 41px;
 }
 
-.instalaciones .texto {
+.instalaciones-public .texto-instalacion {
   text-align: justify;
   font-style: normal;
   font-weight: normal;
