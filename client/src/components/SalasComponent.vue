@@ -25,7 +25,7 @@
     </div>
     <ul v-for="sala in salas" :key="sala.id">
       <li>
-        <SalaComponent></SalaComponent>
+        <SalaComponent :sala=sala></SalaComponent>
       </li>
     </ul>
   </div>
@@ -46,7 +46,6 @@ export default {
     }
   },
   created() {
-    console.log("hola buenas")
     SalaService.getHalls().then(
       response =>{
         this.salas = response.data.data
