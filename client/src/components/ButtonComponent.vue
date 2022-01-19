@@ -1,5 +1,5 @@
 <template>
-  <div class="button"><a>{{nombre}}</a></div>
+  <div class="button"><button @click="$emit('click')">{{nombre}}</button></div>
 </template>
 
 <script>
@@ -20,7 +20,7 @@ export default {
     display: flex;
     flex-direction: row;
 }
-.button a{
+.button button{
     display: block;
     padding: 10px 15px;
     background: black;
@@ -30,7 +30,7 @@ export default {
     margin-right: 10px;
 }
 
-.button a:hover {
+.button button:hover {
     color: #f6fb26;
 }
 
