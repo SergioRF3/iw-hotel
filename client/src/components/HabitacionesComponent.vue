@@ -102,42 +102,4 @@ export default {
   background: rgb(143, 143, 143);
 }
 
-.hindividual{
-  position: absolute;
-  margin-top: 50px;
-  width: 906px;
-  height: 339px;
-  left: 187px;
-  top: 288px;
-}
-
-.hindividual .imagenHabitacion{
-
-  width: 501px;
-  height: 339px;
-  left: 0px;
-  top: 0px;
-  border-radius: 20px;
-  float: left; 
-}
-
-.hindividual .datosHabitacion{
-  display: flex;
-  align-items: flex-start;
-  padding: 30px;
-  font-weight: 550;
-
-  width: 277px;
-  height: 49px;
-  left: 0px;
-  top: 0px;
-}
-
-.hindividual .botonesHabitacion{
-  display: flex;
-  flex-flow: row;
-  align-items: flex-start;
-  padding: 30px;
-}
-
 </style>

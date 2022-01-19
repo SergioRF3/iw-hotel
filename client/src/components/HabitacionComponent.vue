@@ -37,48 +37,10 @@ export default {
 </script>
 
 <style>
-.habitaciones{
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 0px 50px;
-  position: absolute;
-  justify-content: space-between;
-
-  width: 1280px;
-  height: 49px;
-  left: 0px;
-  top: 189px;
-}
-
-.habitaciones .listadesplegable {
-  background: #B7B6B6;
-  border-radius: 20px;
-  padding: 10px 20px;
-  cursor: pointer;
-  margin-right: 20px;
-  transition: background .5s;
-}
-
-.habitaciones .labelHabitacion{
-
-  align-items: flex-start;
-  padding: 10px;
-
-  position: static;
-  width: 106px;
-  height: 49px;
-  left: 0px;
-  top: 0px;
-}
-
-.listadesplegable:hover {
-  background: rgb(143, 143, 143);
-}
 
 .hindividual{
-  position: absolute;
-  margin-top: 50px;
+  margin: auto;
+  margin-top: 125px;
   width: 906px;
   height: 339px;
   left: 187px;
