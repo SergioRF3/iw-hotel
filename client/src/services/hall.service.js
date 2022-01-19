@@ -12,15 +12,15 @@ class HallService {
     }
     
     deleteHall(id){
-        return axios.delete(API_URL,  {data: {'id': id}, headers: {'authorization': 'Bearer ' + store.getters.getToken}})
+        return axios.delete(API_URL,  {data: {'id': id}, headers: {'authorization': 'Bearer ' + localStorage.getItem('token')}})
     }
 
     createHall(number, floor, capacity, description, image, price, state){
-        return axios.post(API_URL, {'number': number, 'floor': floor, 'capacity': capacity, 'description': description,'image': image, 'price': price ,'state': state}, {headers: {'authorization': 'Bearer ' + store.getters.getToken}})
+        return axios.post(API_URL, {'number': number, 'floor': floor, 'capacity': capacity, 'description': description,'image': image, 'price': price ,'state': state}, {headers: {'authorization': 'Bearer ' + localStorage.getItem('token')}})
     }
 
     modifyHall(id, number, floor, capacity, description, image, price, state){
-        return axios.put(API_URL, {'id': id, 'number': number, 'floor': floor, 'capacity': capacity, 'description': description,'image': image, 'price': price ,'state': state}, {headers: {'authorization': 'Bearer ' + store.getters.getToken}})
+        return axios.put(API_URL, {'id': id, 'number': number, 'floor': floor, 'capacity': capacity, 'description': description,'image': image, 'price': price ,'state': state}, {headers: {'authorization': 'Bearer ' + localStorage.getItem('token')}})
     }
 }
 

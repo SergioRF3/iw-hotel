@@ -22,7 +22,6 @@ export default {
   },
   methods: {
     modifyProfile(){
-      console.log("cambio de perfil")
       switch (localStorage.getItem('type')) {
         case '0':
           this.profile = "public"

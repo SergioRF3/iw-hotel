@@ -12,15 +12,15 @@ class FacilityService {
     }
     
     deleteFacility(id){
-        return axios.delete(API_URL,  {data: {'id': id}, headers: {'authorization': 'Bearer ' + store.getters.getToken}})
+        return axios.delete(API_URL,  {data: {'id': id}, headers: {'authorization': 'Bearer ' + localStorage.getItem('token')}})
     }
 
     createFacility(number, increment, start, end){
-        return axios.post(API_URL, {'number': number, 'increment': increment, 'start': start, 'ene': end}, {headers: {'authorization': 'Bearer ' + store.getters.getToken}})
+        return axios.post(API_URL, {'number': number, 'increment': increment, 'start': start, 'ene': end}, {headers: {'authorization': 'Bearer ' + localStorage.getItem('token')}})
     }
 
     modifyFacility(id, number, increment, start, end){
-        return axios.put(API_URL, {'id': id, 'number': number, 'increment': increment, 'start': start, 'ene': end}, {headers: {'authorization': 'Bearer ' + store.getters.getToken}})
+        return axios.put(API_URL, {'id': id, 'number': number, 'increment': increment, 'start': start, 'ene': end}, {headers: {'authorization': 'Bearer ' + localStorage.getItem('token')}})
     }
 }
 

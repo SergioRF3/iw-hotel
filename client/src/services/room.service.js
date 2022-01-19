@@ -12,15 +12,15 @@ class RoomService {
     }
     
     deleteRoom(id){
-        return axios.delete(API_URL,  {data: {'id': id}, headers: {'authorization': 'Bearer ' + store.getters.getToken}})
+        return axios.delete(API_URL,  {data: {'id': id}, headers: {'authorization': 'Bearer ' + localStorage.getItem('token')}})
     }
 
     createRoom(number, image, views, price, floor, beds, state){
-        return axios.post(API_URL, {'number': number, 'image': image, 'views': views, 'price': price,'floor': floor, 'beds': beds ,'state': state}, {headers: {'authorization': 'Bearer ' + store.getters.getToken}})
+        return axios.post(API_URL, {'number': number, 'image': image, 'views': views, 'price': price,'floor': floor, 'beds': beds ,'state': state}, {headers: {'authorization': 'Bearer ' + localStorage.getItem('token')}})
     }
 
-    modifyRoom(id, name, description, type, price, state){
-        return axios.put(API_URL, {'id': id, 'number': number, 'image': image, 'views': views, 'price': price,'floor': floor, 'beds': beds ,'state': state}, {headers: {'authorization': 'Bearer ' + store.getters.getToken}})
+    modifyRoom(id, number, image, views, price, floor, beds, state){
+        return axios.put(API_URL, {'id': id, 'number': number, 'image': image, 'views': views, 'price': price,'floor': floor, 'beds': beds ,'state': state}, {headers: {'authorization': 'Bearer ' + localStorage.getItem('token')}})
     }
 }
 
