@@ -22,45 +22,37 @@
       <input class="listadesplegablesalas" id="fechaEntrada" type="date">
       <label class="labelSala">Salida:</label>
       <input class="listadesplegablesalas" id="fechaSalida" type="date">
-
-
     </div>
-    <div>
-      <div class="sindividual">
-        <img class="imagenSala" />
-        <div class="datosSala">
-          <label>Precio/dia: </label>
-          <p>175</p>
-          <label>€</label>
-        </div>
-        <div class="datosSala">
-          <label>Aforo: </label>
-          <p>200</p>
-        </div>
-        <div class="datosSala">
-          <p>Esta sala con capacidad de 200 personas...</p>
-        </div>
-        <div class="datosSala">
-          <div class="botonesSala">
-            <ButtonComponent nombre="Reservar" />
-            <ButtonComponent nombre="Bloquear" />
-            <ButtonComponent nombre="Desbloquear" />
-          </div>
-        </div>
-
-      </div>
-    </div>
+    <ul v-for="sala in salas" :key="sala.id">
+      <li>
+        <SalaComponent></SalaComponent>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script>
-import ButtonComponent from "@/components/ButtonComponent.vue";
+import SalaComponent from '@/components/SalaComponent.vue'
+import SalaService from '@/services/hall.service.js'
 
 export default {
-    name:'SalasComponent',
-    components: {
-      ButtonComponent,
+  name:'SalasComponent',
+  components: {
+    SalaComponent
+  },
+  data() {
+    return {
+      salas: ''
     }
+  },
+  created() {
+    console.log("hola buenas")
+    SalaService.getHalls().then(
+      response =>{
+        this.salas = response.data.data
+      }
+    )
+  },
 };
 </script>
 
