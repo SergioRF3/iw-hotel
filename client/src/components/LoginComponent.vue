@@ -14,7 +14,7 @@
     </div>
     <div class="botones">
       <ButtonComponent nombre="Iniciar Sesión" @click="checkLogin()"/>
-      <button @click="checkLogin()">{{email}}</button>
+      <button @click="checkLogin()">Iniciar sesion</button>
       <ButtonComponent nombre="Volver" />
     </div>
   </div>
@@ -36,12 +36,15 @@ export default {
     ButtonComponent,
   },
   methods: {
-      checkLogin(){
-        console.log(this.email + " " + this.password)
-        if(AuthService.login(this.email, this.password)){
-          //this.$router.push('/')
+    checkLogin(){
+      AuthService.login(this.email, this.password).then(
+        response => {
+          if(response == 200){
+            this.$router.push('/')
+          }
         }
-     } 
+      )
+    } 
   },
 };
 </script>
