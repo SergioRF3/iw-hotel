@@ -7,3 +7,5 @@
   knex migrate:latest
   knex seed:run
 ```
+
+En caso de que los comandos `knex` no funcionen añadiremos `npx` delante de cada uno de ellos
