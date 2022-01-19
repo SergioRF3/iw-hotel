@@ -1,5 +1,5 @@
 <template>
-  <div class="instalaciones">
+  <div class="instalaciones-public">
     <div class="elemento-instalacion">
       <div class="titulo-instalacion">TITULO</div>
       <img class="izquierda-instalacion"/>
@@ -18,7 +18,7 @@ export default {
 
 <style>
 
-.instalaciones{
+.instalaciones-public{
   margin: auto;
   width: 1113px;
   height: 339px;
@@ -26,11 +26,11 @@ export default {
   top: 148px;
 }
 
-.instalaciones .elemento-instalacion{
+.instalaciones-public .elemento-instalacion{
   margin-bottom: 35px;
 }
 
-.instalaciones .titulo-instalacion{
+.instalaciones-public .titulo-instalacion{
   width: 84px;
   height: 29px;
   left: 0px;
@@ -42,7 +42,7 @@ export default {
   color: #2E2E2E;
 }
 
-.instalaciones .izquierda-instalacion{
+.instalaciones-public .izquierda-instalacion{
   float: left;
   margin-right: 30px;
   border-radius: 20px;
@@ -52,7 +52,7 @@ export default {
   top: 41px;
 }
 
-.instalaciones .texto-instalacion {
+.instalaciones-public .texto-instalacion {
   text-align: justify;
   font-style: normal;
   font-weight: normal;
