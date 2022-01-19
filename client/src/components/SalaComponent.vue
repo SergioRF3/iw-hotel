@@ -80,42 +80,5 @@ export default {
   background: rgb(143, 143, 143);
 }
 
-.sindividual{
-  position: absolute;
-  margin-top: 50px;
-  width: 906px;
-  height: 339px;
-  left: 187px;
-  top: 288px;
-}
-
-.sindividual .imagenSala{
-
-  width: 501px;
-  height: 339px;
-  left: 0px;
-  top: 0px;
-  border-radius: 20px;
-  float: left; 
-}
-
-.sindividual .datosSala{
-  display: flex;
-  align-items: flex-start;
-  padding: 30px;
-  font-weight: 550;
-
-  width: 400px;
-  height: 49px;
-  left: 0px;
-  top: 0px;
-}
-
-.sindividual .botonesSala{
-  display: flex;
-  flex-flow: row;
-  align-items: flex-start;
-  padding: 30px;
-}
 
 </style>
