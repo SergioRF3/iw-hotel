@@ -65,37 +65,37 @@ const routes = [
   // Rutas para admin
   {
     path: '/admin/instalaciones',
-    name: 'InstalacionesAdmim',
+    name: 'InstalacionesAdmin',
     component: FormInstalacionesComponent
   },
   {
     path: '/admin/habitaciones',
-    name: 'HabitacionesAdmim',
+    name: 'HabitacionesAdmin',
     component: FormHabitacionesComponent
   },
   {
     path: '/admin/salas',
-    name: 'SalasAdmim',
+    name: 'SalasAdmin',
     component: FormSalasComponent
   },
   {
     path: '/admin/usuarios',
-    name: 'UsuariosAdmim',
+    name: 'UsuariosAdmin',
     component: FormUsuariosComponent
   },
   {
     path: '/admin/reservas',
-    name: 'ReservasAdmim',
+    name: 'ReservasAdmin',
     component: FormReservasComponent
   },
   {
     path: '/admin/servicios',
-    name: 'ServiciosAdmim',
+    name: 'ServiciosAdmin',
     component: FormServiciosComponent
   },
   {
     path: '/admin/temporadas',
-    name: 'TemporadasAdmim',
+    name: 'TemporadasAdmin',
     component: FormTemporadasComponent
   },
 ]
@@ -104,6 +104,20 @@ const router = new VueRouter({
   mode: 'history',
   base: process.env.BASE_URL,
   routes
+})
+
+router.beforeEach((to, from, next) => {
+  if(to.path.includes("/admin/")){
+    if(localStorage.getItem('type') != 1){
+      next({name: 'Login'})
+    }
+    else{
+      next()
+    }
+  }
+  else{
+    next()
+  }
 })
 
 export default router

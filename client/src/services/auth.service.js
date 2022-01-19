@@ -11,21 +11,25 @@ class AuthService {
         .then(
             response => {
                 if(response.status==200){
-                    console.log("funciona")
                     localStorage.setItem('email', response.data.email)
                     localStorage.setItem('name', response.data.name)
                     localStorage.setItem('type', response.data.type)
                     localStorage.setItem('token', response.data.Bearer)
-                }
-                else{
-                    console.log("eso no existe carck")
+                    return response.status
                 }
             }
         )
+        .catch(
+            error => {
+                return error.response.status
+            }
+        )
     }
-    
     logout(){
-        console.log("deslogeuado")
+        localStorage.removeItem('email')
+        localStorage.removeItem('name')
+        localStorage.removeItem('type')
+        localStorage.removeItem('token')
     }
 }
 
