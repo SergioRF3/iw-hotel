@@ -108,7 +108,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if(to.path.includes("/admin/")){
-    if(localStorage.getItem('type') != 1){
+    if(localStorage.getItem('type') != 2){
       next({name: 'Login'})
     }
     else{
