@@ -17,6 +17,7 @@
         </div>
         <div class="datosSala">
           <div class="botonesSala">
+              <router-link :to="'/reservaSala/' + sala.id"> reserva </router-link>
             <ButtonComponent nombre="Reservar" />
             <ButtonComponent v-if="type == '0'" nombre="Bloquear" />
             <ButtonComponent v-if="type == '0'" nombre="Desbloquear" />
