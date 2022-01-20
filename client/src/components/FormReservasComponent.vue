@@ -171,7 +171,6 @@ export default {
       )
     },
     createReservation() {
-      console.log('que pasa')
       UserService.getUserByEmail(this.form.email).then(
         res => {
           if(res.status == 200){
@@ -182,7 +181,6 @@ export default {
                   this.getReservations()
                   this.resetForm()
                 }
-                console.log(resp)
               }
             )
           }

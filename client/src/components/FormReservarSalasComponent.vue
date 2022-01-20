@@ -6,42 +6,38 @@
     <div class="hreserva">
       <img class="fotoReserva" :src="sala.image"/>
         <div class="datosReserva">
-          <label>Número de sala: </label>
-          <p>{{sala.number}} </p>
+          <label>Nº de sala: {{sala.number}}</label>
         </div>
       <div class="datosReserva">
-        <label>Precio/dia: </label>
-        <p>{{sala.price}} </p>
-        <label>€</label>
+        <label>Precio/dia: {{sala.price}}€</label>
       </div>
       <div class="datosReserva">
-        <label>Aforo: </label>
-        <p>{{sala.capacity}} </p>
+        <label>Aforo: {{sala.capacity}}</label>
       </div>
       <div class="datosReserva">
         <p>Esta sala con capacidad de {{sala.capacity}} personas...</p>
       </div>
       <div class="datosReserva">
-        <label>Total: </label>
-        <p>{{sala.price}} </p>
+        <label>Total: {{sala.price}}€</label>
       </div>
     </div>
 
-       <!-- Servicios -->
+
+    <!-- Servicios -->
     <div class="hreserva">
       <h2> Servicios </h2>
       <ul class="tablaServicios" v-for="service in services" :key="service.id">
-        <li>
-          <ServicioComponent @addPrice=addPrice @subPrice=subPrice :servicio=service></ServicioComponent>
-        </li>
+        <ServicioComponent @addPrice=addPrice @subPrice=subPrice :servicio=service></ServicioComponent>
       </ul>
-
-    <div class="hreserva">
-        <h3>Total Reserva: {{total}}</h3>
-        <ButtonComponent nombre="Pagar" />
-     </div>
+      <div class="total">
+        <h3>Total Reserva: {{total}}€</h3>
+        <router-link :to="'/pago'">
+          <ButtonComponent nombre="Pagar"/>
+        </router-link>
+        
       </div>
     </div>
+  </div>
 </template>
 
 <script>
