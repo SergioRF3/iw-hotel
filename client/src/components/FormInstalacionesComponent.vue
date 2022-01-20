@@ -2,16 +2,15 @@
   <div class="instalaciones">
     <div class="form">
       <div class="row">
-        <div class="col-6">
+        <div class="col-12">
           <div class="field">
             <label class="titulo">Nombre</label>
-            <input type="text" id="nombre" placeholder="Instalación" />
-          </div>
-        </div>
-        <div class="col-6">
-          <div class="field">
-            <label class="titulo">Imagen</label>
-            <input type="text" id="imagen" placeholder="imagen.jpg" />
+            <input
+              type="text"
+              id="nombre"
+              placeholder="Instalación"
+              v-model="form.name"
+            />
           </div>
         </div>
       </div>
@@ -25,44 +24,158 @@
               placeholder="Introduce aqui la descripción de la instalación"
               cols="30"
               rows="6"
+              v-model="form.description"
             ></textarea>
           </div>
         </div>
       </div>
       <div class="botones">
-        <ButtonComponent nombre="Introducir" />
-        <ButtonComponent nombre="Volver" />
+        <ButtonComponent
+          v-if="introducir"
+          nombre="Introducir"
+          @click="createFacility"
+        />
+        <ButtonComponent
+          v-if="introducir == false"
+          nombre="Modificar"
+          @click="modifyFacility"
+        />
+        <ButtonComponent nombre="Limpiar" @click="botonLimpiar" />
       </div>
     </div>
     <div class="tabla">
-      <table class="table table-dark">
-        <thead>
-          <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Nombre</th>
-            <th scope="col">Acciones</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- Ejemplo para hacer la tabla de las instalaciones
-            <tr v-for="vu in valoresUsuarios" :key="vu.id">
-            <th>{{vu.id}}</th>
-            <td>{{vu.nombre}}</td>
-            <td><button class="btn btn-danger btn-xs" @click="verDetallesUsuario(vu.id)">Ver Detalles</button></td>
-            <td><button class="btn btn-primary btn-xs" @click="borrarUsuario(vu.id, $event)" >X</button></td>
-            </tr>  -->
-        </tbody>
-      </table>
+      <b-table
+        striped
+        hover
+        head-variant="dark"
+        :fields="fields"
+        :items="instalaciones"
+        :sort-by.sync="sortBy"
+        :sort-desc.sync="sortDesc"
+        sort-icon-left
+      >
+        <template #cell(actions)="data">
+          <div class="acciones">
+            <ButtonComponent
+              nombre="Ver Detalles"
+              @click="getFacility(data.item.id)"
+            />
+            <ButtonComponent
+              nombre="Borrar"
+              @click="deleteFacility(data.item.id)"
+            />
+          </div>
+        </template>
+      </b-table>
     </div>
   </div>
 </template>
 
 <script>
 import ButtonComponent from "@/components/ButtonComponent.vue";
+import FacilityService from "@/services/facility.service.js";
+
 export default {
   name: "FormInstalacionesComponent",
   components: {
     ButtonComponent,
+  },
+  data() {
+    return {
+      introducir: true,
+      sortBy: "id",
+      sortDesc: false,
+      instalaciones: [],
+      fields: [
+        {
+          key: "id",
+          label: "Id",
+          sortable: true,
+        },
+        {
+          key: "name",
+          label: "Nombre",
+          sortable: true,
+        },
+        {
+          key: "actions",
+          label: "Acciones",
+        },
+      ],
+      form: {
+        id: "",
+        name: "",
+        image: "",
+        description: "",
+      },
+    };
+  },
+  created() {
+    this.getFacilitys();
+  },
+  methods: {
+    getFacilitys() {
+      FacilityService.getFacilitys().then((res) => {
+        if (res.status == 200) {
+          this.instalaciones = res.data.data;
+        }
+      });
+    },
+    getFacility(id) {
+      FacilityService.getFacility(id).then((res) => {
+        if (res.status == 200) {
+          this.form.id = res.data[0].id;
+          this.form.name = res.data[0].name;
+          this.form.image = res.data[0].image;
+          this.form.description = res.data[0].description;
+          this.introducir = false;
+        }
+      });
+    },
+    createFacility() {
+      FacilityService.createFacility(this.form).then(
+        res => {
+          if(res.status == 201){
+            this.getFacilitys()
+            this.resetForm()
+          }
+        }
+      )
+    },
+    modifyFacility() {
+      console.log('lol')
+      FacilityService.modifyFacility(this.form).then(
+        res => {
+          if(res.status == 201){
+            this.getFacilitys()
+            this.resetForm()
+          }
+        }
+      )
+    },
+    deleteFacility(id){
+      if(window.confirm('¿Estas seguro de borrar esta instalación?')){
+        FacilityService.deleteFacility(id).then(
+          res => {
+            if(res.status == 200){
+              this.getFacilitys()
+            }
+          }
+        )
+      }
+    },
+    resetForm() {
+      this.form.id = '';
+      this.form.name = '';
+      this.form.image = '';
+      this.form.description = '';
+      this.introducir = true
+    },
+    botonLimpiar() {
+      if(window.confirm('¿Estas seguro de que quieres limpiar los datos?')){
+        this.resetForm()
+      }
+    }
   },
 };
 </script>
@@ -77,7 +190,7 @@ export default {
   margin: 10vh auto;
   width: 80%;
 }
-.table th{
+.table th {
   border-top: 0px;
 }
 tr th:first-child {

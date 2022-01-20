@@ -406,13 +406,12 @@ app.get('/facilities', async function(req,res) {
 
 //Create facility
 //Query returns the new autoincremented id
-app.post('/facility', checkJWT, async function(req, res) {
+app.post('/facilities', checkJWT, async function(req, res) {
     var facility = req.body
     var id = await knex('facility')
-        .insert({number: facility.number,
-                increment: facility.increment,
-                start: facility.start,
-                end: facility.end})
+        .insert({name: facility.name,
+                description: facility.description,
+                image: facility.image})
         .returning('id')
     res.status(201).send('http://localhost:3000/facilities/' + id)
 })
@@ -420,12 +419,12 @@ app.post('/facility', checkJWT, async function(req, res) {
 //Modify facility given an existing one
 app.put('/facilities', checkJWT, async function(req,res) {
     var facility = req.body
+    console.log(facility)
     await knex('facility')
         .where('id', '=', facility.id)
-        .update({number: facility.number,
-                increment: facility.increment,
-                start: facility.start,
-                end: facility.end})
+        .update({name: facility.name,
+                description: facility.description,
+                image: facility.image})
         .where('id', facility.id)
     res.status(201).send('http://localhost:3000/facilities/' + facility.id)
 })
