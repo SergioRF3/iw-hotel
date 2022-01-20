@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="habitaciones">
-      <select class="listadesplegable" name="Camas" id="camas">
+      <select v-model="beds" class="listadesplegable" name="Camas" id="camas">
         <option value="0" selected disabled hidden>NºCamas</option>
         <option value="1">1</option>
         <option value="2">2</option>
@@ -9,14 +9,14 @@
         <option value="4">+4</option>
       </select>
 
-      <select class="listadesplegable" name="Vistas" id="vistas">
+      <select v-model="views" class="listadesplegable" name="Vistas" id="vistas">
         <option value="0" selected disabled hidden>Vistas</option>
         <option value="piscina">Piscina</option>
         <option value="playa">Playa</option>
         <option value="ciudad">Ciudad</option>
       </select>
 
-      <select class="listadesplegable" name="Precio" id="precio">
+      <select v-model="price" class="listadesplegable" name="Precio" id="precio">
         <option value="0" selected disabled hidden>Precio</option>
         <option value="20">+20€/noche</option>
         <option value="40">+40€/noche</option>
@@ -49,16 +49,39 @@ export default {
   },
   data() {
     return {
-      habitaciones: ''
+      habitaciones: '',
+      beds: 0,
+      views: 0,
+      price: 0,
     }
   },
   created() {
-    HabitacionService.getRooms().then(
+    HabitacionService.getRooms(this.beds, this.views, this.price).then(
       response =>{
-        this.habitaciones = response.data.data
+        this.habitaciones = response.data
       }
     )
   },
+  methods: {
+    getRooms(){
+      HabitacionService.getRooms(this.beds, this.views, this.price).then(
+        response =>{
+          this.habitaciones = response.data  
+        }
+      )
+    }
+  },
+  watch: {
+    beds(){
+      this.getRooms()
+    },
+    views(){
+      this.getRooms()
+    },
+    price(){
+      this.getRooms()
+    }
+  }
 };
 </script>
 

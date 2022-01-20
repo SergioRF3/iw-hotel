@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="salas">
-      <select class="listadesplegablesalas" name="Aforo" id="aforo">
+      <select v-model="capacity" class="listadesplegablesalas" name="Aforo" id="aforo">
         <option value="0" selected disabled hidden>Aforo</option>
         <option value="50">+50 personas</option>
         <option value="100">+100 personas</option>
@@ -9,7 +9,7 @@
         <option value="400">+400 personas</option>
       </select>
 
-      <select class="listadesplegablesalas" name="Precio" id="precio">
+      <select v-model="price" class="listadesplegablesalas" name="Precio" id="precio">
         <option value="0" selected disabled hidden>Precio</option>
         <option value="100">+100€/dia</option>
         <option value="200">+200€/dia</option>
@@ -42,16 +42,35 @@ export default {
   },
   data() {
     return {
-      salas: ''
+      salas: '',
+      capacity: 0,
+      price: 0,
     }
   },
   created() {
-    SalaService.getHalls().then(
+    SalaService.getHalls(this.capacity,this.price).then(
       response =>{
-        this.salas = response.data.data
+        this.salas = response.data  
       }
     )
   },
+  methods: {
+    getHalls(){
+      SalaService.getHalls(this.capacity, this.price).then(
+        response =>{
+          this.salas = response.data  
+        }
+      )
+    }
+  },
+  watch: {
+    capacity(){
+      this.getHalls()
+    },
+    price(){
+      this.getHalls()
+    }
+  }
 };
 </script>
 

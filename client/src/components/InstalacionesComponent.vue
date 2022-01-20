@@ -1,19 +1,35 @@
 <template>
   <div class="instalaciones-public">
-    <div class="elemento-instalacion">
-      <div class="titulo-instalacion">TITULO</div>
-      <img class="izquierda-instalacion"/>
-      <p class="texto-instalacion"> Lorem ipsum dolor sit amet consectetur, adipisicing elit. Saepe numquam corporis ipsam nobis porro expedita blanditiis sit magni iusto reprehenderit at illo tempore exercitationem officiis repellat natus hic eos ab, tenetur nesciunt impedit atque veniam a voluptatum? Error corrupti laboriosam nulla eius. Fugit quisquam repellendus, dolor quos facere necessitatibus. Assumenda, dolor, qui at adipisci fugiat voluptatibus voluptatem id rerum error unde veniam hic alias</p>
+    <div v-for="vi in instalaciones" :key="vi.id">
+      <div class="elemento-instalacion">
+        <div class="titulo-instalacion">{{vi.name}}</div>
+        <img class="izquierda-instalacion" :src="vi.image"/>
+        <p class="texto-instalacion">{{vi.description}}</p>
 
+      </div>
     </div>
 
   </div>
 </template>
 
 <script>
+import InstalacionService from '@/services/facility.service.js'
+
 export default {
-    name: 'InstalacionesComponent'
-}
+    name: 'InstalacionesComponent',
+    data() {
+      return {
+        instalaciones: ''
+      }
+    },
+    created() {
+      InstalacionService.getFacilitys().then(
+        response =>{
+          this.instalaciones = response.data.data
+        }
+      )
+    }
+};
 </script>
 
 <style>

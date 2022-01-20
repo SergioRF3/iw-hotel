@@ -15,12 +15,12 @@ class SeasonService {
         return axios.delete(API_URL,  {data: {'id': id}, headers: {'authorization': 'Bearer ' + localStorage.getItem('token')}})
     }
 
-    createSeason(name, increment, start, end){
-        return axios.post(API_URL, {'name': name, 'increment': increment, 'start': start,'end': end}, {headers: {'authorization': 'Bearer ' + localStorage.getItem('token')}})
+    createSeason(o){
+        return axios.post(API_URL, {'name': o.name, 'increment': o.increment, 'start': o.start,'end': o.end}, {headers: {'authorization': 'Bearer ' + localStorage.getItem('token')}})
     }
 
-    modifySeason(id, name, increment, start, end){
-        return axios.put(API_URL, {'id': id, 'name': name, 'increment': increment, 'start': start,'end': end}, {headers: {'authorization': 'Bearer ' + localStorage.getItem('token')}})
+    modifySeason(o){
+        return axios.put(API_URL, {'id': o.id, 'name': o.name, 'increment': o.increment, 'start': o.start,'end': o.end}, {headers: {'authorization': 'Bearer ' + localStorage.getItem('token')}})
     }
 }
 

@@ -16,9 +16,10 @@
           <p>{{habitacion.views}} </p>
         </div>
         <div class="botonesHabitacion">
+          <router-link :to="'/reservaHab/' + habitacion.id"> reserva </router-link>
           <ButtonComponent nombre="Reservar" />
-          <ButtonComponent nombre="Bloquear" />
-          <ButtonComponent nombre="Desbloquear" />
+          <ButtonComponent v-if="type == '0'" nombre="Bloquear" />
+          <ButtonComponent v-if="type == '0'" nombre="Desbloquear" />
         </div>
       </div>
     </div>
@@ -30,6 +31,11 @@ import ButtonComponent from "@/components/ButtonComponent.vue";
 export default {
     name: 'HabitacionComponent',
     props: ['habitacion'],
+    data() {
+      return {
+        type: localStorage.getItem('type')
+      }
+    },
     components: {
       ButtonComponent,
     }

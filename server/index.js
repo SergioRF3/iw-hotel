@@ -139,10 +139,20 @@ app.get('/users/:id', async function(req,res) {
 
 //View list of all users
 app.get('/users', async function(req,res) {
-    var currentPage = req.query.page
-    var limit = req.query.limit
-    var search  =req.query.search
-    res.status(200).send(await pagination('user', currentPage, limit, 'email', search))
+    var email = req.query.email
+    var user = await knex('user').select()
+    .modify(function(queryBuilder) {
+        if (email != 0) {
+            queryBuilder.where('email', email)
+        }
+    })
+    res.status(200).send(user)
+})
+app.post('/users/email', async function(req,res) {
+    var email = req.body.email
+    console.log('hola')
+    var user = await knex('user').where('email','=',email)
+    res.status(200).send(user)
 })
 
 //Create user
@@ -165,6 +175,7 @@ app.post('/users', checkJWT, async function(req, res) {
 app.put('/users', checkJWT, async function(req,res) {
     var user = req.body
     await knex('user')
+        .where('id', '=', user.id)
         .update({email: user.email,
                 name: user.name,
                 password: user.password,
@@ -191,10 +202,20 @@ app.get('/halls/:id', async function(req,res) {
 
 //View list of all halls
 app.get('/halls', async function(req,res) {
-    var currentPage = req.query.page
-    var limit = req.query.limit
-    var search  =req.query.search
-    res.status(200).send(await pagination('hall', currentPage, limit, 'number', search))
+    var capacity = req.query.capacity
+    var price = req.query.price
+    var hall = await knex('hall').select()
+    .modify(function(queryBuilder) {
+        if (price != 0) {
+            queryBuilder.where('price', '<',price)
+        }
+    })
+    .modify(function(queryBuilder) {
+        if (capacity != 0) {
+            queryBuilder.where('capacity', '>' ,capacity)
+        }
+    })
+    res.status(200).send(hall)
 })
 
 //Create hall
@@ -217,6 +238,7 @@ app.post('/halls', checkJWT, async function(req, res) {
 app.put('/halls', checkJWT, async function(req,res) {
     var hall = req.body
     await knex('hall')
+    .where('id', '=', hall.id)
         .update({number: hall.number,
                 floor: hall.floor,
                 capacity: hall.capacity,
@@ -268,6 +290,7 @@ app.post('/services', checkJWT, async function(req, res) {
 app.put('/services', checkJWT, async function(req,res) {
     var service = req.body
     await knex('service')
+        .where('id', '=', service.id)
         .update({name: service.name,
                 description: service.description,
                 type: service.type,
@@ -293,10 +316,26 @@ app.get('/rooms/:id', async function(req,res) {
 
 //View list of all rooms
 app.get('/rooms', async function(req,res) {
-    var currentPage = req.query.page
-    var limit = req.query.limit
-    var search  =req.query.search
-    res.status(200).send(await pagination('room', currentPage, limit, 'number', search))
+    var beds = req.query.beds
+    var views = req.query.views
+    var price  = req.query.price
+    var room = await knex('room').select()
+    .modify(function(queryBuilder) {
+        if (price != 0) {
+            queryBuilder.where('price', '<', price)
+        }
+    })
+    .modify(function(queryBuilder) {
+        if (beds != 0) {
+            queryBuilder.where('beds', beds)
+        }
+    })
+    .modify(function(queryBuilder) {
+        if (views != 0) {
+            queryBuilder.where('views', views)
+        }
+    })
+    res.status(200).send(room)
 })
 
 //Create room
@@ -319,6 +358,7 @@ app.post('/rooms', checkJWT, async function(req, res) {
 app.put('/rooms', checkJWT, async function(req,res) {
     var room = req.body
     await knex('room')
+        .where('id', '=', room.id)  
         .update({number: room.number,
                 image: room.image,
                 views: room.views,
@@ -369,6 +409,7 @@ app.post('/season', checkJWT, async function(req, res) {
 app.put('/seasons', checkJWT, async function(req,res) {
     var season = req.body
     await knex('season')
+        .where('id', '=', season.id)
         .update({name: season.name,
                 increment: season.increment,
                 start: season.start,
@@ -401,13 +442,12 @@ app.get('/facilities', async function(req,res) {
 
 //Create facility
 //Query returns the new autoincremented id
-app.post('/facility', checkJWT, async function(req, res) {
+app.post('/facilities', checkJWT, async function(req, res) {
     var facility = req.body
     var id = await knex('facility')
-        .insert({number: facility.number,
-                increment: facility.increment,
-                start: facility.start,
-                end: facility.end})
+        .insert({name: facility.name,
+                description: facility.description,
+                image: facility.image})
         .returning('id')
     res.status(201).send('http://localhost:3000/facilities/' + id)
 })
@@ -416,10 +456,10 @@ app.post('/facility', checkJWT, async function(req, res) {
 app.put('/facilities', checkJWT, async function(req,res) {
     var facility = req.body
     await knex('facility')
-        .update({number: facility.number,
-                increment: facility.increment,
-                start: facility.start,
-                end: facility.end})
+        .where('id', '=', facility.id)
+        .update({name: facility.name,
+                description: facility.description,
+                image: facility.image})
         .where('id', facility.id)
     res.status(201).send('http://localhost:3000/facilities/' + facility.id)
 })
@@ -434,7 +474,12 @@ app.delete('/facilities', checkJWT, async function(req,res) {
 //---------------------------------------------- Reservation ---------------------------------------------------------
 //View reservation given an id
 app.get('/reservations/:id', async function(req,res) {
-    var reservation = await knex('reservation').select().where('id',req.params.id)
+    var reservation = await knex('reservation')
+                            .join('user','reservation.user_id','=','user.id')
+                            .join('hall','reservation.hall_id','=','hall.id')
+                            .join('room','reservation.room_id','=','room.id')
+                            .select('reservation.id','user.name','hall.number','room.number','reservation.start','reservation.end')
+                            .where('reservation.id',req.params.id)             
     res.status(200).send(reservation)
 })
 
@@ -443,7 +488,12 @@ app.get('/reservations', async function(req,res) {
     var currentPage = req.query.page
     var limit = req.query.limit
     var search  =req.query.search
-    res.status(200).send(await pagination('reservation', currentPage, limit, 'name', search))
+    var reservation = await knex('reservation')
+                            .join('user','reservation.user_id','=','user.id')
+                            .join('hall','reservation.hall_id','=','hall.id')
+                            .join('room','reservation.room_id','=','room.id')
+                            .select('reservation.id','user.name','hall.number','room.number','reservation.start','reservation.end')
+    res.status(200).send(reservation)
 })
 
 //Create reservation
@@ -466,6 +516,7 @@ app.post('/reservation', checkJWT, async function(req, res) {
 app.put('/reservations', checkJWT, async function(req,res) {
     var reservation = req.body
     await knex('reservation')
+        .where('id', '=', reservation.id)
         .update({start: reservation.start,
                 end: reservation.end,
                 state: reservation.state,
