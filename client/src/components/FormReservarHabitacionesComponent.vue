@@ -25,7 +25,7 @@
       </div>
       <div class="datosReserva">
         <label>Total: </label>
-        <p>5</p>
+        <p>{{habitacion.price}}</p>
       </div>
     </div>
 
@@ -34,10 +34,11 @@
       <h2> Servicios </h2>
       <ul class="tablaServicios" v-for="service in services" :key="service.id">
         <li>
-          <ServicioComponent :servicio=service></ServicioComponent>
+          <ServicioComponent @addPrice=addPrice @subPrice=subPrice :servicio=service></ServicioComponent>
         </li>
       </ul>
       <div class="hreserva">
+        <h3>Total Reserva: {{total}}</h3>
         <ButtonComponent nombre="Pagar" />
       </div>
     </div>
@@ -54,7 +55,8 @@ export default {
     data() {
       return {
         habitacion: "",
-        services: ""
+        services: "",
+        total: "",
       }
     },
     components: {
@@ -70,8 +72,17 @@ export default {
       RoomService.getRoom(this.$route.params.id).then(
         response => {
           this.habitacion = response.data[0]
+          this.total = this.habitacion.price  
         }
       )
+    },
+    methods: {
+      addPrice(newPrice){
+        this.total += newPrice
+      },
+      subPrice(newPrice){
+        this.total -= newPrice
+      }
     },
 }
 </script>

@@ -11,7 +11,8 @@
         <label>€</label>
       </div>
       <div class="datosServicio">
-        <ButtonComponent nombre="Añadir" />
+        <ButtonComponent v-if="!added" @click="addService()" nombre="Añadir" />
+        <ButtonComponent v-if="added" @click="subPrice()" nombre="Quitar" />
       </div>
     </div>
   </div>
@@ -22,10 +23,25 @@ import ButtonComponent from "@/components/ButtonComponent.vue";
 
 export default {
     name:'ServicioComponent',
+    data() {
+      return {
+        added: false
+      }
+    },
     components: {
       ButtonComponent,
     },
-    props: ['servicio']
+    props: ['servicio'],
+    methods: {
+      addService(){
+        this.added = true
+        this.$emit('addPrice', this.servicio.price)
+      },
+      subPrice(){
+        this.added=false
+        this.$emit('subPrice', this.servicio.price)
+      }
+    },
 };
 </script>
 
