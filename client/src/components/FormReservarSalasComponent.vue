@@ -25,6 +25,7 @@
         <label>Total: </label>
         <p>{{reserva.total}} </p>
       </div>
+    </div>
 
        <!-- Servicios -->
     <div>
