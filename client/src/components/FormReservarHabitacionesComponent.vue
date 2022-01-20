@@ -4,43 +4,42 @@
     <h1>Reserva de habitaciones</h1>
     
     <!-- Habitación -->
-    <div class="">
-      <div class="">
+    <div class="hreserva">
+      <img class="fotoReserva" :src="habitacion.image"/>
+      <div class="datosReserva">
         <label>Número de habitación </label>
         <p>{{habitacion.number}} </p>
       </div>
-      <img class="" :src="habitacion.image"/>
-      <div class="">
+      <div class="datosReserva">
         <label>Precio/noche: </label>
         <p>{{habitacion.price}} </p>
         <label>€</label>
       </div>
-      <div class="">
+      <div class="datosReserva">
         <label>Nº de camas: </label>
         <p>{{habitacion.beds}} </p>
       </div>
-      <div class="">
+      <div class="datosReserva">
         <label>Vistas: </label>
         <p>{{habitacion.views}} </p>
       </div>
-      <div class="">
+      <div class="datosReserva">
         <label>Total: </label>
         <p>5</p>
       </div>
     </div>
 
       <!-- Servicios -->
-    <div>
+    <div class="hreserva">
       <h2> Servicios </h2>
-      <ul v-for="service in services" :key="service.id">
+      <ul class="tablaServicios" v-for="service in services" :key="service.id">
         <li>
           <ServicioComponent :servicio=service></ServicioComponent>
         </li>
       </ul>
-    </div>
-
-    <div class="">
-      <ButtonComponent nombre="Pagar" />
+      <div class="hreserva">
+        <ButtonComponent nombre="Pagar" />
+      </div>
     </div>
 </div>
 </template>
@@ -79,5 +78,45 @@ export default {
 
 
 <style>
+
+.hreserva{
+  margin: auto;
+  margin-top: 125px;
+  width: 906px;
+  height: 339px;
+  left: 187px;
+  top: 288px;
+}
+
+.hreserva .fotoReserva{
+
+  width: 501px;
+  height: 339px;
+  left: 0px;
+  top: 0px;
+  border-radius: 20px;
+  float: left; 
+}
+
+.hreserva .datosReserva {
+
+  display: flex;
+  align-items: flex-start;
+  padding: 30px;
+  font-weight: 550;
+
+  width: 277px;
+  height: 49px;
+  left: 0px;
+  top: 0px;
+}
+
+.hreserva .tablaServicios{
+
+  border-radius: 20px;
+  background-color: rgb(36, 36, 36);
+  box-shadow: 7px 7px 15px black;
+  color: white;
+}
 
 </style>

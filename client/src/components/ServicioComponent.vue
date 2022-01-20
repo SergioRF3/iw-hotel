@@ -1,16 +1,16 @@
 <template>
   <div>
-    <div class="">
-      <div class="">
-        <label>Nombre</label>
+    <div class="servicios">
+      <div class="datosServicio">
+        <label>Nombre: </label>
         <p>{{servicio.name}} </p>
       </div>
-      <div class="">
+      <div class="datosServicio">
         <label>Precio: </label>
         <p>{{servicio.price}} </p>
         <label>€</label>
       </div>
-      <div class="">
+      <div class="datosServicio">
         <ButtonComponent nombre="Añadir" />
       </div>
     </div>
@@ -30,5 +30,24 @@ export default {
 </script>
 
 <style>
+
+.servicios{
+
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  padding: 0px 50px;
+
+  width: 400px;
+  height: 120px;
+}
+
+.servicios .datosServicio{
+
+  display: flex;
+  align-items: flex-start;
+  padding: 10px 20px;
+  margin-right: 100px;
+}
 
 </style>
