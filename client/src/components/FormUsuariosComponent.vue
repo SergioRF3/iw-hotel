@@ -82,7 +82,7 @@
           nombre="Modificar"
           v-on:click="modificarUsuario"
         />
-        <ButtonComponent nombre="Volver" />
+        <ButtonComponent nombre="Limpiar" @click="botonLimpiar" />
       </div>
     </div>
     <div class="tabla">
@@ -102,7 +102,10 @@
               nombre="Ver Detalles"
               @click="verDetalles(data.item.id)"
             />
-            <ButtonComponent nombre="Borrar" />
+            <ButtonComponent
+              nombre="Borrar"
+              @click="borrarUsuario(data.item.id)"
+            />
           </div>
         </template>
       </b-table>
@@ -170,6 +173,17 @@ export default {
       this.getUsuarios();
       this.resetForm();
     },
+    borrarUsuario: function(id) {
+      if(window.confirm('¿Estas seguro de que quieres borrar este usuario?')){
+        UserService.deleteUser(id).then(
+          res => {
+            if(res.status == 200){
+              this.getUsuarios()
+            }
+          }
+        )
+      }
+    },
     verDetalles: function (id) {
       UserService.getUser(id).then((res) => {
         this.form.id = res.data[0].id;
@@ -184,7 +198,6 @@ export default {
       });
     },
     modificarUsuario: function () {
-      console.log(this.form)
       UserService.modifyUser(this.form).then((res) => {
         if (res.status == 201) {
           this.getUsuarios();
@@ -201,7 +214,6 @@ export default {
       });
     },
     resetForm() {
-      console.log("hola");
       this.form.id = "";
       this.form.name = "";
       this.form.password = "";
@@ -209,7 +221,13 @@ export default {
       this.form.phone = "";
       this.form.type = "";
       this.form.state = "";
+      this.introducir = true;
     },
+    botonLimpiar() {
+      if(window.confirm('¿Estas seguro de que quieres limpiar los datos?')){
+        this.resetForm()
+      }
+    }
   },
 };
 </script>
