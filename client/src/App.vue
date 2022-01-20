@@ -24,7 +24,7 @@ export default {
     modifyProfile(){
       switch (localStorage.getItem('type')) {
         case '0':
-          this.profile = "public"
+          this.profile = "usuario"
           break;
         case '1':
           this.profile = "usuario"
