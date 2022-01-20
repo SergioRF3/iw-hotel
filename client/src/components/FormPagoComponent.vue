@@ -6,15 +6,15 @@
     <div class="formPago">
     <div class="field">
       <label class="titulo">Cantidad</label>
-      <input type="number" id="cantidad" placeholder="0.00" />
+      <input v-model="payment.amount" type="number" id="cantidad" placeholder="0.00" />
     </div>
     <div class="field">
       <label class="titulo">Concepto</label>
-      <input type="text" id="nombre" placeholder="Concepto" />
+      <input v-model="payment.concept" type="text" id="nombre" placeholder="Concepto" />
     </div>
     <div class="field">
       <label class="titulo">Referencia</label>
-      <input type="text" id="referencia" placeholder="Referencia" />
+      <input v-model="payment.reference" type="text" id="referencia" placeholder="Referencia" />
     </div>
     
     <div class="total">
@@ -24,19 +24,19 @@
     </div>
     <div class="field">
       <label class="titulo">Titular</label>
-      <input type="text" id="titular" placeholder="Titular" />
+      <input v-model="payment.creditCard.owner" type="text" id="titular" placeholder="Titular" />
     </div>
     <div class="field">
       <label class="titulo">Número</label>
-      <input type="number" id="numero" placeholder="Número" />
+      <input v-model="payment.creditCard.number"  type="number" id="numero" placeholder="Número" />
     </div>
     <div class="field">
       <label class="titulo">CCV</label>
-      <input type="text" id="ccv" placeholder="CCV" />
+      <input v-model="payment.creditCard.ccv"  type="text" id="ccv" placeholder="CCV" />
     </div>
     <div class="field">
       <label class="titulo">Fecha de expiración</label>
-      <input type="text" id="expiracion" placeholder="Fecha de expiración" />
+      <input v-model="payment.creditCard.expiry"  type="text" id="expiracion" placeholder="Fecha de expiración" />
     </div>
     <div class="total">
        <ButtonComponent @click="pay()" nombre="Pagar" />
@@ -67,23 +67,29 @@ export default {
   },
   data() {
     return {
-      token: "",
-      amount: "",
-      conectp: "",
-      reference: "",
-      creditCard: {
-        owner: "",
-        number: "",
-        ccv: "",
-        expiry: ""
+      payment: {
+        amount: "",
+        concept: "",
+        reference: "",
+        creditCard: {
+          owner: "",
+          number: "",
+          ccv: "",
+          expiry: ""
+        }
       }
     }
   },
   methods: {
     pay(){
+      console.log(this)
       PaymentService.getToken().then(
         response => {
-          this.token = response.data.authToken
+          PaymentService.postPayment(this.payment, response.data.authToken).then(
+            response => {
+              console.log(response)
+            }
+          )
         }
       )
     }
