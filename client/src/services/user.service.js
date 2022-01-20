@@ -10,6 +10,10 @@ class UserService {
     getUser(id) {
         return axios.get(API_URL + id);
     }
+
+    getUserByEmail(email) {
+        return axios.post(API_URL + 'email/',{'email': email});
+    }
     
     deleteUser(id){
         return axios.delete(API_URL,  {data: {'id': id}, headers: {'authorization': 'Bearer ' + localStorage.getItem('token')}})

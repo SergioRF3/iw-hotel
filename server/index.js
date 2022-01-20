@@ -144,6 +144,12 @@ app.get('/users', async function(req,res) {
     var search  =req.query.search
     res.status(200).send(await pagination('user', currentPage, limit, 'email', search))
 })
+app.post('/users/email', async function(req,res) {
+    var email = req.body.email
+    console.log('hola')
+    var user = await knex('user').where('email','=',email)
+    res.status(200).send(user)
+})
 
 //Create user
 //Query returns the new autoincremented id
@@ -419,7 +425,6 @@ app.post('/facilities', checkJWT, async function(req, res) {
 //Modify facility given an existing one
 app.put('/facilities', checkJWT, async function(req,res) {
     var facility = req.body
-    console.log(facility)
     await knex('facility')
         .where('id', '=', facility.id)
         .update({name: facility.name,
@@ -439,7 +444,12 @@ app.delete('/facilities', checkJWT, async function(req,res) {
 //---------------------------------------------- Reservation ---------------------------------------------------------
 //View reservation given an id
 app.get('/reservations/:id', async function(req,res) {
-    var reservation = await knex('reservation').select().where('id',req.params.id)
+    var reservation = await knex('reservation')
+                            .join('user','reservation.user_id','=','user.id')
+                            .join('hall','reservation.hall_id','=','hall.id')
+                            .join('room','reservation.room_id','=','room.id')
+                            .select('reservation.id','user.name','hall.number','room.number','reservation.start','reservation.end')
+                            .where('reservation.id',req.params.id)             
     res.status(200).send(reservation)
 })
 
@@ -448,7 +458,12 @@ app.get('/reservations', async function(req,res) {
     var currentPage = req.query.page
     var limit = req.query.limit
     var search  =req.query.search
-    res.status(200).send(await pagination('reservation', currentPage, limit, 'name', search))
+    var reservation = await knex('reservation')
+                            .join('user','reservation.user_id','=','user.id')
+                            .join('hall','reservation.hall_id','=','hall.id')
+                            .join('room','reservation.room_id','=','room.id')
+                            .select('reservation.id','user.name','hall.number','room.number','reservation.start','reservation.end')
+    res.status(200).send(reservation)
 })
 
 //Create reservation

@@ -143,7 +143,6 @@ export default {
       )
     },
     modifyFacility() {
-      console.log('lol')
       FacilityService.modifyFacility(this.form).then(
         res => {
           if(res.status == 201){
