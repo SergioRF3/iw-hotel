@@ -31,7 +31,10 @@
       </ul>
       <div class="total">
         <h3>Total Reserva: {{total}}€</h3>
-        <ButtonComponent nombre="Pagar"/>
+        <router-link :to="'/pago'">
+          <ButtonComponent nombre="Pagar"/>
+        </router-link>
+        
       </div>
     </div>
 </div>

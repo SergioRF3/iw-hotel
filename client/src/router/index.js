@@ -15,6 +15,7 @@ import FormReservarSalasComponent from '@/components/FormReservarSalasComponent.
 import FormReservasComponent from '@/components/FormReservasComponent.vue'
 import FormServiciosComponent from '@/components/FormServiciosComponent.vue'
 import FormTemporadasComponent from '@/components/FormTemporadasComponent.vue'
+import FormPagoComponent from '@/components/FormPagoComponent.vue'
 import PerfilComponent from '@/components/PerfilComponent.vue'
 
 Vue.use(VueRouter)
@@ -49,6 +50,11 @@ const routes = [
     path: '/reservaSala/:id',
     name: 'ReservaSala',
     component: FormReservarSalasComponent
+  },
+  {
+    path: '/pago',
+    name: 'Pago',
+    component: FormPagoComponent
   },
   {
     path: '/about',

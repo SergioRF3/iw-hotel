@@ -16,8 +16,9 @@
           <p>{{habitacion.views}} </p>
         </div>
         <div class="botonesHabitacion">
-          <router-link :to="'/reservaHab/' + habitacion.id"> reserva </router-link>
-          <ButtonComponent nombre="Reservar" />
+          <router-link :to="'/reservaHab/' + habitacion.id">
+            <ButtonComponent nombre="Reservar" />
+           </router-link>
           <ButtonComponent v-if="type == '0'" nombre="Bloquear" />
           <ButtonComponent v-if="type == '0'" nombre="Desbloquear" />
         </div>
