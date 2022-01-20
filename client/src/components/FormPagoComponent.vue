@@ -58,12 +58,35 @@
 </template>
 <script>
 import ButtonComponent from "@/components/ButtonComponent.vue";
-
+import PaymentService from "@/services/payment.service.js";
 
 export default {
     name: 'FormPagoComponent',
     components: {
     ButtonComponent,
+  },
+  data() {
+    return {
+      token: "",
+      amount: "",
+      conectp: "",
+      reference: "",
+      creditCard: {
+        owner: "",
+        number: "",
+        ccv: "",
+        expiry: ""
+      }
+    }
+  },
+  methods: {
+    pay(){
+      PaymentService.getToken().then(
+        response => {
+          this.token = response.data.authToken
+        }
+      )
+    }
   },
 }
 </script>
