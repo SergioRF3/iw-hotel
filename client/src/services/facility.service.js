@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/facilitys/';
+const API_URL = 'http://localhost:3000/facilities/';
 
 class FacilityService {
     getFacilitys() {
@@ -15,12 +15,12 @@ class FacilityService {
         return axios.delete(API_URL,  {data: {'id': id}, headers: {'authorization': 'Bearer ' + localStorage.getItem('token')}})
     }
 
-    createFacility(number, increment, start, end){
-        return axios.post(API_URL, {'number': number, 'increment': increment, 'start': start, 'ene': end}, {headers: {'authorization': 'Bearer ' + localStorage.getItem('token')}})
+    createFacility(o){
+        return axios.post(API_URL, {'name': o.name, 'description': o.description, 'image': o.image}, {headers: {'authorization': 'Bearer ' + localStorage.getItem('token')}})
     }
 
-    modifyFacility(id, number, increment, start, end){
-        return axios.put(API_URL, {'id': id, 'number': number, 'increment': increment, 'start': start, 'ene': end}, {headers: {'authorization': 'Bearer ' + localStorage.getItem('token')}})
+    modifyFacility(o){
+        return axios.put(API_URL, {'id': o.id, 'name': o.name, 'description': o.description, 'image': o.image}, {headers: {'authorization': 'Bearer ' + localStorage.getItem('token')}})
     }
 }
 

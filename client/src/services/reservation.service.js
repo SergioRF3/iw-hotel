@@ -15,12 +15,13 @@ class ReservationService {
         return axios.delete(API_URL,  {data: {'id': id}, headers: {'authorization': 'Bearer ' + localStorage.getItem('token')}})
     }
 
-    createReservation(start, end, state, total, room_id, hall_id, user_id){
-        return axios.post(API_URL, {'start': start, 'end': end, 'state': state, 'total': total,'room_id': room_id, 'hall_id': hall_id ,'user_id': user_id}, {headers: {'authorization': 'Bearer ' + localStorage.getItem('token')}})
+    createReservation(o){
+        console.log(o)
+        return axios.post(API_URL, {'start': o.start, 'end': o.end, 'state': o.state, 'total': o.total,'room_id': o.room_id, 'hall_id': o.hall_id ,'user_id': o.user_id}, {headers: {'authorization': 'Bearer ' + localStorage.getItem('token')}})
     }
 
-    modifyReservation(id, start, end, state, total, room_id, hall_id, user_id){
-        return axios.put(API_URL, {'id': id, 'start': start, 'end': end, 'state': state, 'total': total,'room_id': room_id, 'hall_id': hall_id ,'user_id': user_id}, {headers: {'authorization': 'Bearer ' + localStorage.getItem('token')}})
+    modifyReservation(o){
+        return axios.put(API_URL, {'id': o.id, 'start': o.start, 'end': o.end, 'state': o.state, 'total': o.total,'room_id': o.room_id, 'hall_id': o.hall_id ,'user_id': o.user_id}, {headers: {'authorization': 'Bearer ' + localStorage.getItem('token')}})
     }
 }
 
