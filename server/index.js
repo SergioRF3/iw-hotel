@@ -270,6 +270,7 @@ app.post('/services', checkJWT, async function(req, res) {
 app.put('/services', checkJWT, async function(req,res) {
     var service = req.body
     await knex('service')
+        .where('id', '=', service.id)
         .update({name: service.name,
                 description: service.description,
                 type: service.type,
@@ -321,6 +322,7 @@ app.post('/rooms', checkJWT, async function(req, res) {
 app.put('/rooms', checkJWT, async function(req,res) {
     var room = req.body
     await knex('room')
+        .where('id', '=', room.id)  
         .update({number: room.number,
                 image: room.image,
                 views: room.views,
@@ -371,6 +373,7 @@ app.post('/season', checkJWT, async function(req, res) {
 app.put('/seasons', checkJWT, async function(req,res) {
     var season = req.body
     await knex('season')
+        .where('id', '=', season.id)
         .update({name: season.name,
                 increment: season.increment,
                 start: season.start,
@@ -418,6 +421,7 @@ app.post('/facility', checkJWT, async function(req, res) {
 app.put('/facilities', checkJWT, async function(req,res) {
     var facility = req.body
     await knex('facility')
+        .where('id', '=', facility.id)
         .update({number: facility.number,
                 increment: facility.increment,
                 start: facility.start,
@@ -468,6 +472,7 @@ app.post('/reservation', checkJWT, async function(req, res) {
 app.put('/reservations', checkJWT, async function(req,res) {
     var reservation = req.body
     await knex('reservation')
+        .where('id', '=', reservation.id)
         .update({start: reservation.start,
                 end: reservation.end,
                 state: reservation.state,
