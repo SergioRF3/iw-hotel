@@ -165,6 +165,7 @@ app.post('/users', checkJWT, async function(req, res) {
 app.put('/users', checkJWT, async function(req,res) {
     var user = req.body
     await knex('user')
+        .where('id', '=', user.id)
         .update({email: user.email,
                 name: user.name,
                 password: user.password,

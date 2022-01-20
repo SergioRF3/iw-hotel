@@ -68,10 +68,25 @@ export default {
 </script>
 
 <style>
+.acciones {
+  display: flex;
+  flex-flow: row;
+  justify-content: center;
+}
 .tabla {
   margin: 10vh auto;
   width: 80%;
 }
+.table th{
+  border-top: 0px;
+}
+tr th:first-child {
+  border-radius: 20px 0px 0px 0px;
+}
+tr th:last-child {
+  border-radius: 0px 20px 0px 0px;
+}
+
 .form {
   width: 60%;
   background-color: #b5b2b2;
