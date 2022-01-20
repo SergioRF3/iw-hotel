@@ -86,13 +86,20 @@ export default {
         response => {
           PaymentService.postPayment(this.payment, response.data.authToken).then(
             response => {
-              console.log(response)
+              if(response.data.status == "ACCEPTED"){
+                this.$router.push('/')
+              }
             }
           )
         }
       )
     }
   },
+  computed: {
+    amount(value){
+      return parseFloat(value)
+    }
+  }
 }
 </script>
 
