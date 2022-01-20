@@ -27,9 +27,7 @@
     <div class="hreserva">
       <h2> Servicios </h2>
       <ul class="tablaServicios" v-for="service in services" :key="service.id">
-        <li>
           <ServicioComponent @addPrice=addPrice @subPrice=subPrice :servicio=service></ServicioComponent>
-        </li>
       </ul>
       <div class="total">
         <h3>Total Reserva: {{total}}€</h3>
