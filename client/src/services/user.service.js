@@ -3,8 +3,8 @@ import axios from 'axios';
 const API_URL = 'http://localhost:3000/users/';
 
 class UserService {
-    getUsers() {
-        return axios.get(API_URL, {params: {}});
+    getUsers(email) {
+        return axios.get(API_URL, {params: {'email': email}});
     }
 
     getUser(id) {

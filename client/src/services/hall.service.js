@@ -3,8 +3,8 @@ import axios from 'axios';
 const API_URL = 'http://localhost:3000/halls/';
 
 class HallService {
-    getHalls() {
-        return axios.get(API_URL, {params: {}});
+    getHalls(capacity, price) {
+        return axios.get(API_URL, {params: {'capacity': capacity, 'price': price}});
     }
 
     getHall(id) {

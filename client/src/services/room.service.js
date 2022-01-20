@@ -3,8 +3,8 @@ import axios from 'axios';
 const API_URL = 'http://localhost:3000/rooms/';
 
 class RoomService {
-    getRooms() {
-        return axios.get(API_URL, {params: {}});
+    getRooms(beds, views, price) {
+        return axios.get(API_URL, {params: {'beds': beds, 'views': views, 'price':price}});
     }
 
     getRoom(id) {

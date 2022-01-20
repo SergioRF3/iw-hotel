@@ -18,8 +18,8 @@
         <div class="datosSala">
           <div class="botonesSala">
             <ButtonComponent nombre="Reservar" />
-            <ButtonComponent nombre="Bloquear" />
-            <ButtonComponent nombre="Desbloquear" />
+            <ButtonComponent v-if="type == '0'" nombre="Bloquear" />
+            <ButtonComponent v-if="type == '0'" nombre="Desbloquear" />
           </div>
         </div>
       </div>
@@ -35,7 +35,12 @@ export default {
     components: {
       ButtonComponent,
     },
-    props: ['sala']
+    props: ['sala'],
+    data() {
+        return {
+            type: localStorage.getItem('type')
+        }
+    },
 };
 </script>
 

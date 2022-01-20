@@ -139,10 +139,14 @@ app.get('/users/:id', async function(req,res) {
 
 //View list of all users
 app.get('/users', async function(req,res) {
-    var currentPage = req.query.page
-    var limit = req.query.limit
-    var search  =req.query.search
-    res.status(200).send(await pagination('user', currentPage, limit, 'email', search))
+    var email = req.query.email
+    var user = await knex('user').select()
+    .modify(function(queryBuilder) {
+        if (email != 0) {
+            queryBuilder.where('email', email)
+        }
+    })
+    res.status(200).send(user)
 })
 
 //Create user
@@ -191,10 +195,20 @@ app.get('/halls/:id', async function(req,res) {
 
 //View list of all halls
 app.get('/halls', async function(req,res) {
-    var currentPage = req.query.page
-    var limit = req.query.limit
-    var search  =req.query.search
-    res.status(200).send(await pagination('hall', currentPage, limit, 'number', search))
+    var capacity = req.query.capacity
+    var price = req.query.price
+    var hall = await knex('hall').select()
+    .modify(function(queryBuilder) {
+        if (price != 0) {
+            queryBuilder.where('price', '<',price)
+        }
+    })
+    .modify(function(queryBuilder) {
+        if (capacity != 0) {
+            queryBuilder.where('capacity', '>' ,capacity)
+        }
+    })
+    res.status(200).send(hall)
 })
 
 //Create hall
@@ -293,10 +307,26 @@ app.get('/rooms/:id', async function(req,res) {
 
 //View list of all rooms
 app.get('/rooms', async function(req,res) {
-    var currentPage = req.query.page
-    var limit = req.query.limit
-    var search  =req.query.search
-    res.status(200).send(await pagination('room', currentPage, limit, 'number', search))
+    var beds = req.query.beds
+    var views = req.query.views
+    var price  = req.query.price
+    var room = await knex('room').select()
+    .modify(function(queryBuilder) {
+        if (price != 0) {
+            queryBuilder.where('price', '<', price)
+        }
+    })
+    .modify(function(queryBuilder) {
+        if (beds != 0) {
+            queryBuilder.where('beds', beds)
+        }
+    })
+    .modify(function(queryBuilder) {
+        if (views != 0) {
+            queryBuilder.where('views', views)
+        }
+    })
+    res.status(200).send(room)
 })
 
 //Create room
