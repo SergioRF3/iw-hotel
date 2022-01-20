@@ -157,7 +157,7 @@ app.post('/users/email', async function(req,res) {
 
 //Create user
 //Query returns the new autoincremented id
-app.post('/users', checkJWT, async function(req, res) {
+app.post('/users', async function(req, res) {
     var user = req.body
     var id = await knex('user')
         .insert({email: user.email,

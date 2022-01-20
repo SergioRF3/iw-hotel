@@ -20,7 +20,7 @@ class UserService {
     }
 
     createUser(o){
-        return axios.post(API_URL, {'email': o.email, 'name': o.name, 'password': o.password, 'dni': o.dni,'phone': o.phone, 'type': o.type ,'state': o.state}, {headers: {'authorization': 'Bearer ' + localStorage.getItem('token')}})
+        return axios.post(API_URL, {'email': o.email, 'name': o.name, 'password': o.password, 'dni': o.dni,'phone': o.phone, 'type': o.type ,'state': o.state})
     }
 
     modifyUser(o){
