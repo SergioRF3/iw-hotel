@@ -10,6 +10,8 @@ import FormInstalacionesComponent from '@/components/FormInstalacionesComponent.
 import FormHabitacionesComponent from '@/components/FormHabitacionesComponent.vue'
 import FormSalasComponent from '@/components/FormSalasComponent.vue'
 import FormUsuariosComponent from '@/components/FormUsuariosComponent.vue'
+import FormReservarHabitacionesComponent from '@/components/FormReservarHabitacionesComponent.vue'
+import FormReservarSalasComponent from '@/components/FormReservarSalasComponent.vue'
 import FormReservasComponent from '@/components/FormReservasComponent.vue'
 import FormServiciosComponent from '@/components/FormServiciosComponent.vue'
 import FormTemporadasComponent from '@/components/FormTemporadasComponent.vue'
@@ -37,6 +39,16 @@ const routes = [
     path: '/salas',
     name: 'Salas',
     component: SalasComponent
+  },
+  {
+    path: '/reservaHab',
+    name: 'ReservaHab',
+    component: FormReservarHabitacionesComponent
+  },
+  {
+    path: '/reservaSala',
+    name: 'ReservaSala',
+    component: FormReservarSalasComponent
   },
   {
     path: '/about',
