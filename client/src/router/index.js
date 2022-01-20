@@ -54,7 +54,15 @@ const routes = [
   {
     path: '/pago',
     name: 'Pago',
-    component: FormPagoComponent
+    component: FormPagoComponent,
+    beforeEnter: (to, from, next) => {
+      if(localStorage.getItem('type') == undefined){
+        next({name: 'Login'})
+      }
+      else{
+        next()
+      }
+    }
   },
   {
     path: '/about',
