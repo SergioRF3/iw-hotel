@@ -7,25 +7,19 @@
     <div class="hreserva">
       <img class="fotoReserva" :src="habitacion.image"/>
       <div class="datosReserva">
-        <label>Número de habitación </label>
-        <p>{{habitacion.number}} </p>
+        <label>Nº de habitación: {{habitacion.number}}</label>
       </div>
       <div class="datosReserva">
-        <label>Precio/noche: </label>
-        <p>{{habitacion.price}} </p>
-        <label>€</label>
+        <label>Precio/noche: {{habitacion.price}}€</label>
       </div>
       <div class="datosReserva">
-        <label>Nº de camas: </label>
-        <p>{{habitacion.beds}} </p>
+        <label>Nº de camas: {{habitacion.beds}}</label>
       </div>
       <div class="datosReserva">
-        <label>Vistas: </label>
-        <p>{{habitacion.views}} </p>
+        <label>Vistas: {{habitacion.views}} </label>
       </div>
       <div class="datosReserva">
-        <label>Total: </label>
-        <p>{{habitacion.price}}</p>
+        <label>Total: {{habitacion.price}}€</label>
       </div>
     </div>
 
@@ -37,9 +31,9 @@
           <ServicioComponent @addPrice=addPrice @subPrice=subPrice :servicio=service></ServicioComponent>
         </li>
       </ul>
-      <div class="hreserva">
-        <h3>Total Reserva: {{total}}</h3>
-        <ButtonComponent nombre="Pagar" />
+      <div class="total">
+        <h3>Total Reserva: {{total}}€</h3>
+        <ButtonComponent nombre="Pagar"/>
       </div>
     </div>
 </div>
@@ -128,6 +122,16 @@ export default {
   background-color: rgb(36, 36, 36);
   box-shadow: 7px 7px 15px black;
   color: white;
+  align-content: center;
+}
+
+.total{
+  margin: auto;
+  margin-top: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 </style>

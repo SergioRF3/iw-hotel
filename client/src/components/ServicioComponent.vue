@@ -1,20 +1,38 @@
 <template>
   <div>
+    <!-- 
     <div class="servicios">
-      <div class="datosServicio">
-        <label>Nombre: </label>
-        <p>{{servicio.name}} </p>
-      </div>
-      <div class="datosServicio">
-        <label>Precio: </label>
-        <p>{{servicio.price}} </p>
-        <label>€</label>
-      </div>
-      <div class="datosServicio">
-        <ButtonComponent v-if="!added" @click="addService()" nombre="Añadir" />
-        <ButtonComponent v-if="added" @click="subPrice()" nombre="Quitar" />
+      <div class="row">
+        <div class="datosServicio column">
+          <label>Nombre: </label>
+          <p>{{servicio.name}} </p>
+        </div>
+        <div class="datosServicio column">
+          <label>Precio: </label>
+          <p>{{servicio.price}} </p>
+          <label>€</label>
+        </div>
+        <div class="datosServicio column">
+          <ButtonComponent v-if="!added" @click="addService()" nombre="Añadir" />
+          <ButtonComponent v-if="added" @click="subPrice()" nombre="Quitar" />
+        </div>
       </div>
     </div>
+  -->
+  <div class="row">
+    <div class="column">
+      <p>{{servicio.name}} </p>
+    </div>
+    <div class="column" >
+      <p>{{servicio.price}}€</p>
+    </div>
+    <div class="column">
+      <ButtonComponent v-if="!added" @click="addService()" nombre="Añadir" />
+      <ButtonComponent v-if="added" @click="subPrice()" nombre="Quitar" />
+    </div>
+  </div>
+
+
   </div>
 </template>
 
@@ -47,23 +65,15 @@ export default {
 
 <style>
 
-.servicios{
-
+/* Create three equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 2px;
   display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  padding: 0px 50px;
+  justify-content: center;
+  align-items: center;
 
-  width: 400px;
-  height: 120px;
-}
-
-.servicios .datosServicio{
-
-  display: flex;
-  align-items: flex-start;
-  padding: 10px 20px;
-  margin-right: 100px;
 }
 
 </style>
