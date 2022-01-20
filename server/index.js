@@ -218,6 +218,7 @@ app.post('/halls', checkJWT, async function(req, res) {
 app.put('/halls', checkJWT, async function(req,res) {
     var hall = req.body
     await knex('hall')
+    .where('id', '=', hall.id)
         .update({number: hall.number,
                 floor: hall.floor,
                 capacity: hall.capacity,
