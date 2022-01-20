@@ -139,10 +139,14 @@ app.get('/users/:id', async function(req,res) {
 
 //View list of all users
 app.get('/users', async function(req,res) {
-    var currentPage = req.query.page
-    var limit = req.query.limit
-    var search  =req.query.search
-    res.status(200).send(await pagination('user', currentPage, limit, 'email', search))
+    var email = req.query.email
+    var user = await knex('user').select()
+    .modify(function(queryBuilder) {
+        if (email != 0) {
+            queryBuilder.where('email', email)
+        }
+    })
+    res.status(200).send(user)
 })
 
 //Create user

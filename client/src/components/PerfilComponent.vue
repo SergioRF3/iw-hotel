@@ -6,7 +6,7 @@
     <div class="datos">
       <div class="row">
         <div class="col-10 text-left">
-          <label>Usuario</label>
+          <label>{{user.name}}</label>
         </div>
         <div class="col-2">
           <b-icon-pencil-fill />
@@ -14,7 +14,7 @@
       </div>
       <div class="row">
         <div class="col-10 text-left">
-          <label>usuarios@usuarios.com</label>
+          <label>{{user.email}}</label>
         </div>
         <div class="col-2">
           <b-icon-pencil-fill />
@@ -22,7 +22,7 @@
       </div>
       <div class="row">
         <div class="col-10 text-left">
-          <label>48484848X</label>
+          <label>{{user.dni}}</label>
         </div>
         <div class="col-2">
           <b-icon-pencil-fill />
@@ -30,7 +30,7 @@
       </div>
       <div class="row">
         <div class="col-10 text-left">
-          <label>+34 655 655 655</label>
+          <label>{{user.phone}}</label>
         </div>
         <div class="col-2">
           <b-icon-pencil-fill />
@@ -45,11 +45,24 @@
 
 <script>
 import ButtonComponent from "@/components/ButtonComponent.vue";
+import UserService from "@/services/user.service.js";
 
 export default {
   name: "PerfilComponent",
   components: {
     ButtonComponent,
+  },
+  data() {
+    return {
+      user: ''
+    }
+  },
+  created() {
+    UserService.getUsers(localStorage.getItem('email')).then(
+      response => {
+        this.user = response.data[0]
+      }
+    )
   },
 };
 </script>
