@@ -6,26 +6,26 @@
     </div>
     <div class="field">
       <label class="titulo">Nombre</label>
-      <input type="text" id="nombre" placeholder="Jaume Aragonés" />
+      <input v-model="name" type="text" id="nombre" placeholder="Jaume Aragonés" />
     </div>
     <div class="field">
       <label class="titulo">DNI</label>
-      <input type="text" id="dni" placeholder="11111111A" />
+      <input v-model="dni" type="text" id="dni" placeholder="11111111A" />
     </div>
     <div class="field">
       <label class="titulo">Email</label>
-      <input type="text" id="email" placeholder="usuario@usuario.com" />
+      <input v-model="email" type="text" id="email" placeholder="usuario@usuario.com" />
     </div>
     <div class="field">
       <label class="titulo">Contraseña</label>
-      <input type="password" id="password" placeholder="***********" />
+      <input v-model="password" type="password" id="password" placeholder="***********" />
     </div>
     <div class="field">
       <label class="titulo">Teléfono</label>
-      <input type="text" id="telefono" placeholder="965123123" />
+      <input v-model="phone" type="text" id="telefono" placeholder="965123123" />
     </div>
     <div class="botones">
-      <ButtonComponent nombre="Registrarse" />
+      <ButtonComponent nombre="Registrarse" @click="register()" />
       <ButtonComponent nombre="Volver" />
     </div>
   </div>
@@ -33,11 +33,40 @@
 
 <script>
 import ButtonComponent from "@/components/ButtonComponent.vue";
+import UserService from '@/services/user.service.js'
+import AuthService from '@/services/auth.service.js'
 
 export default {
   name: "RegistroComponent",
   components: {
     ButtonComponent,
+  },
+  data() {
+    return {
+      name: "",
+      dni: "",
+      email: "",
+      password: "",
+      phone: ""
+    }
+  },
+  methods: {
+    register(){
+      UserService.createUser({'name': this.name, 'dni': this.dni, 'email': this.email, 'password': this.password, 'phone':this.phone, 'state': false, 'type': 0}).then(
+        response => {
+          if(response.status == 201){
+            AuthService.login(this.name, this.password).then(
+              response => {
+                if(response == 200){
+                  this.$emit('profileChange')
+                  this.$router.push('/')
+                }
+              }
+            )
+          }
+        }
+      )
+    } 
   },
 };
 </script>
