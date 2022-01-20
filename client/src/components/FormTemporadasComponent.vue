@@ -170,7 +170,6 @@ export default {
       });
     },
     deleteSeason(id) {
-      console.log('lol')
       if (window.confirm("¿Estas seguro que quieres borrar esta temporada?")) {
         SeasonService.deleteSeason(id).then(
           (res) => {

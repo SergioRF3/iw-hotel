@@ -82,7 +82,6 @@ export default {
   },
   methods: {
     pay(){
-      console.log(this)
       PaymentService.getToken().then(
         response => {
           PaymentService.postPayment(this.payment, response.data.authToken).then(
