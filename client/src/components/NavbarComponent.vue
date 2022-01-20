@@ -1,8 +1,8 @@
 <template>
   <div class="navbar">
     <div v-if="navbar == 'public'" class="na">
-      <div class="logo">
-        <img src="#"/>
+      <div>
+        <b-img fluid src="../assets/logoHotel3.png" style="height: 3em;"/>
       </div>
       <nav class="navb">
         <router-link to="/"><b-icon-house-door-fill scale="1.3" /></router-link>
@@ -15,7 +15,7 @@
     </div>
     <div v-if="navbar == 'usuario'" class="na">
       <div class="logo">
-        <img src="#"/>
+        <b-img fluid src="../assets/logoHotel3.png" style="height: 3em;"/>
       </div>
       <nav class="navb">
         <router-link to="/"><b-icon-house-door-fill scale="1.3" /></router-link>
@@ -24,12 +24,14 @@
         <router-link to="/salas">Salas</router-link>
         <router-link to="/about">Sobre nosotros</router-link>
       </nav>
-      <router-link class="login" to="/perfil">{{user}}</router-link>
-      <router-link class="login" to="/" @click.native="removeCredentials(), $emit('profileChange')">Logout</router-link>
+      <div>
+        <router-link class="login" to="/perfil">{{user}}</router-link>
+        <router-link class="login" to="/" @click.native="removeCredentials(), $emit('profileChange')">Logout</router-link>
+      </div>
     </div>
     <div v-if="navbar == 'admin'" class="na">
       <div class="logo">
-        <img src="#"/>
+        <b-img fluid src="../assets/logoHotel3.png" style="height: 3em;"/>
       </div>
       <nav class="navb">
         <router-link to="/admin/instalaciones">Instalaciones</router-link>

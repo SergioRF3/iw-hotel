@@ -26,7 +26,9 @@
     </div>
     <div class="botones">
       <ButtonComponent nombre="Registrarse" @click="register()" />
-      <ButtonComponent nombre="Volver" />
+      <router-link :to="'/'">
+        <ButtonComponent nombre="Volver" />
+      </router-link>
     </div>
   </div>
 </template>
@@ -52,10 +54,10 @@ export default {
   },
   methods: {
     register(){
-      UserService.createUser({'name': this.name, 'dni': this.dni, 'email': this.email, 'password': this.password, 'phone':this.phone, 'state': false, 'type': 0}).then(
+      UserService.createUser({'name': this.name, 'dni': this.dni, 'email': this.email, 'password': this.password, 'phone':this.phone, 'state': false, 'type': 1}).then(
         response => {
           if(response.status == 201){
-            AuthService.login(this.name, this.password).then(
+            AuthService.login(this.email, this.password).then(
               response => {
                 if(response == 200){
                   this.$emit('profileChange')
