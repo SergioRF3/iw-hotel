@@ -25,16 +25,16 @@
       </div>
       <div class="">
         <label>Total: </label>
-        <p>{{reserva.total}} </p>
+        <p>5</p>
       </div>
     </div>
 
       <!-- Servicios -->
     <div>
       <h2> Servicios </h2>
-      <ul v-for="servicio in servicios" :key="servicio.id">
+      <ul v-for="service in services" :key="service.id">
         <li>
-          <ServicioComponent :servicio=servicio></ServicioComponent>
+          <ServicioComponent :servicio=service></ServicioComponent>
         </li>
       </ul>
     </div>
@@ -47,15 +47,33 @@
 <script>
 import ButtonComponent from "@/components/ButtonComponent.vue";
 import ServicioComponent from '@/components/ServicioComponent.vue'
-
+import RoomService from '@/services/room.service.js'
+import ServiceService from '@/services/service.service.js'
 
 export default {
     name: 'FormReservarHabitacionesComponent',
-    props: ['habitacion'],
+    data() {
+      return {
+        habitacion: "",
+        services: ""
+      }
+    },
     components: {
       ButtonComponent,
       ServicioComponent,      
-    }
+    },
+    created() {
+      ServiceService.getServices().then(
+        response => {
+          this.services = response.data.data
+        }
+      )
+      RoomService.getRoom(this.$route.params.id).then(
+        response => {
+          this.habitacion = response.data[0]
+        }
+      )
+    },
 }
 </script>
 

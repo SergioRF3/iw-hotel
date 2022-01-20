@@ -41,7 +41,7 @@ const routes = [
     component: SalasComponent
   },
   {
-    path: '/reservaHab',
+    path: '/reservaHab/:id',
     name: 'ReservaHab',
     component: FormReservarHabitacionesComponent
   },

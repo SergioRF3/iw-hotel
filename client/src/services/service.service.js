@@ -1,9 +1,10 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000/service/';
+const API_URL = 'http://localhost:3000/services/';
 
 class ServiceService {
     getServices() {
+        console.log("pureba")
         return axios.get(API_URL, {params: {}});
     }
 
